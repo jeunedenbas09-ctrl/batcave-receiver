@@ -1,0 +1,31 @@
+{
+ "_mode_emploi": "Semaine type fixe. Une entrée = {\"heure\": \"HH:MM\", \"fin\": \"HH:MM\" (facultatif), \"titre\": \"...\"}. « fin » dessine le créneau sur le cadran et permet d'afficher « en cours ». Jours : lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche. Laisse [] pour un jour libre.",
+ "semaine": {
+  "lundi": [
+   {"heure": "", "titre": "Taff"}
+  ],
+  "mardi": [
+   {"heure": "08:00", "fin": "15:00", "titre": "Taff (8h-15h)"},
+   {"heure": "17:00", "fin": "19:00", "titre": "Entraînement foot avec les petits (17h-19h)"},
+   {"heure": "20:00", "fin": "22:00", "titre": "Foot en club avec Ouchi (20h-22h)"}
+  ],
+  "mercredi": [
+   {"heure": "", "titre": "Taff"}
+  ],
+  "jeudi": [
+   {"heure": "08:00", "fin": "15:00", "titre": "Taff (8h-15h)"},
+   {"heure": "17:00", "fin": "19:00", "titre": "Entraînement foot avec les petits (17h-19h)"},
+   {"heure": "20:00", "fin": "22:00", "titre": "Foot en club avec Ouchi (20h-22h)"}
+  ],
+  "vendredi": [
+   {"heure": "09:00", "fin": "17:00", "titre": "École (9h-17h)"}
+  ],
+  "samedi": [
+   {"heure": "matin", "titre": "Match avec les petits"}
+  ],
+  "dimanche": [
+   {"heure": "matin", "titre": "Taff"},
+   {"heure": "après-midi", "titre": "Match avec Ouchi"}
+  ]
+ }
+}
