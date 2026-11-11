@@ -1,0 +1,24 @@
+name: Mise à jour Batcave
+on:
+  schedule:
+    - cron: "30 5 * * *"   # tous les jours à 6h30 (heure de Paris, décalée d'1 h en été)
+  workflow_dispatch:         # bouton « Run workflow » depuis le téléphone
+permissions:
+  contents: write
+jobs:
+  maj:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install edge-tts
+      - run: python maj.py
+      - name: Publier les fichiers
+        run: |
+          git config user.name "batcave-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add donnees.json briefing.mp3
+          git commit -m "maj Batcave $(date -u +%F)" || echo "rien à publier"
+          git push
