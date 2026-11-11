@@ -14,6 +14,13 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install edge-tts pynacl
+      - name: Diagnostic des secrets (vrai/faux seulement)
+        env:
+          WITHINGS_CLIENT_ID: ${{ secrets.WITHINGS_CLIENT_ID }}
+          WITHINGS_CLIENT_SECRET: ${{ secrets.WITHINGS_CLIENT_SECRET }}
+          WITHINGS_REFRESH_TOKEN: ${{ secrets.WITHINGS_REFRESH_TOKEN }}
+        run: |
+          echo "ID=$([ -n "$WITHINGS_CLIENT_ID" ] && echo vrai || echo faux) SECRET=$([ -n "$WITHINGS_CLIENT_SECRET" ] && echo vrai || echo faux) REFRESH=$([ -n "$WITHINGS_REFRESH_TOKEN" ] && echo vrai || echo faux)"
       - name: Mise à jour (météo, prières, poids Withings, voix)
         env:
           WITHINGS_CLIENT_ID: ${{ secrets.WITHINGS_CLIENT_ID }}
