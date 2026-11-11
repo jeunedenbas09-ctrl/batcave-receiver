@@ -1,15 +1,22 @@
 {
  "date": "mercredi 11 novembre 2026",
- "genere": "2026-11-11 23:16",
- "priorites": [
-  "Séance de sport",
-  "Trouver des idées de tournage de vidéo",
-  "Remplir les cahiers de culture",
-  "Lire 15 pages de Robin des Bois"
- ],
+ "genere": "2026-11-11 23:35",
+ "meteo": {
+  "ville": "Choisy-le-Roi",
+  "source": "Open-Meteo",
+  "releve": "2026-11-11T23:30",
+  "temp": 9,
+  "ressenti": 9,
+  "ciel": "",
+  "vent": 1,
+  "min": 9,
+  "max": 16,
+  "pluie": 20,
+  "ciel_jour": "",
+  "lever": "07:52",
+  "coucher": "17:15"
+ },
  "prieres": {
-  "mosquee": "AMC Mosquée de Choisy-Le-Roi",
-  "maj": "2026-11-10 20:47",
   "prieres": [
    {
     "nom": "Fajr",
@@ -47,136 +54,135 @@
    "13:45"
   ]
  },
- "prochaine": {
-  "nom": "Fajr",
-  "adhan": "06:05",
-  "iqama": "06:15",
-  "demain": true
- },
+ "priorites": [
+  "Séance de sport",
+  "Trouver des idées de tournage de vidéo",
+  "Remplir les cahiers de culture",
+  "Lire 15 pages de Robin des Bois"
+ ],
  "classement": {
   "titre": "Classement · Choisy-le-Roi AS Senior 2",
-  "source": "FFF - epreuves.fff.fr (classement détaillé)",
   "equipe_suivie": "CHOISY LE ROI AS 2",
   "lignes": [
    {
     "rang": 1,
     "equipe": "CHAMPIGNY F.C. 94 2",
     "pts": 15,
-    "j": 6,
-    "g": 5,
+    "j": 0,
+    "g": 0,
     "n": 0,
-    "p": 1,
-    "diff": 4
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 2,
     "equipe": "BONNEUIL S/MARNE CSM 2",
     "pts": 15,
-    "j": 6,
-    "g": 5,
+    "j": 0,
+    "g": 0,
     "n": 0,
-    "p": 1,
-    "diff": 15
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 3,
     "equipe": "CACHAN CO ASC",
     "pts": 10,
-    "j": 5,
-    "g": 3,
-    "n": 1,
-    "p": 1,
-    "diff": 3
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 4,
     "equipe": "ENT.MANDRES MOLDAVIE",
     "pts": 10,
-    "j": 6,
-    "g": 3,
-    "n": 1,
-    "p": 2,
-    "diff": 2
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 5,
     "equipe": "CHOISY LE ROI AS 2",
     "pts": 9,
-    "j": 5,
-    "g": 2,
-    "n": 3,
+    "j": 0,
+    "g": 0,
+    "n": 0,
     "p": 0,
-    "diff": 3
+    "diff": 0
    },
    {
     "rang": 6,
     "equipe": "BANN'ZANMI",
     "pts": 8,
-    "j": 6,
-    "g": 2,
-    "n": 2,
-    "p": 2,
-    "diff": 2
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 7,
     "equipe": "NOGENT S/MARNE F.C. 2",
     "pts": 7,
-    "j": 6,
-    "g": 2,
-    "n": 1,
-    "p": 3,
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
     "diff": 0
    },
    {
     "rang": 8,
     "equipe": "VILLENEUVE AFC",
     "pts": 7,
-    "j": 6,
-    "g": 1,
-    "n": 4,
-    "p": 1,
-    "diff": 1
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 9,
     "equipe": "ARCUEIL COM",
     "pts": 5,
-    "j": 6,
-    "g": 1,
-    "n": 2,
-    "p": 3,
-    "diff": 1
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 10,
     "equipe": "CHARENTON CAP 3",
     "pts": 4,
-    "j": 6,
-    "g": 1,
-    "n": 1,
-    "p": 4,
-    "diff": -5
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 11,
     "equipe": "BRY F.C.",
     "pts": 4,
-    "j": 6,
-    "g": 1,
-    "n": 1,
-    "p": 4,
-    "diff": -19
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 12,
     "equipe": "VITRY E.S.",
     "pts": 1,
-    "j": 6,
+    "j": 0,
     "g": 0,
-    "n": 2,
-    "p": 4,
-    "diff": -7
+    "n": 0,
+    "p": 0,
+    "diff": 0
    }
   ]
  },
@@ -184,10 +190,12 @@
   "equipe": "CHOISY LE ROI AS 2",
   "adversaire": "CACHAN CO ASC",
   "domicile": true,
+  "affiche": "dim 15 nov · 15h00",
   "date": "2026-11-15",
-  "heure": "15:00",
-  "journee": "Senior Journée 3",
-  "source": "FFF - epreuves.fff.fr (calendrier)",
-  "affiche": "dim 15 nov · 15h00"
- }
+  "heure": "15:00"
+ },
+ "corps": null,
+ "agenda": [],
+ "texte": "Bonjour, Monsieur Amine. Nous sommes le mercredi 11 novembre. À Choisy-le-Roi, 9 degrés, ressenti 9. Vos priorités du jour : Séance de sport ; Trouver des idées de tournage de vidéo ; Remplir les cahiers de culture ; Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
+ "audio": "briefing.mp3"
 }
