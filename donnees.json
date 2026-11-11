@@ -1,31 +1,31 @@
 {
- "date": "mercredi 11 novembre 2026",
- "genere": "2026-11-11 23:49",
+ "date": "jeudi 12 novembre 2026",
+ "genere": "2026-11-12 00:07",
  "meteo": {
   "ville": "Choisy-le-Roi",
   "source": "Open-Meteo",
-  "releve": "2026-11-11T23:45",
-  "temp": 10,
+  "releve": "2026-11-12T00:00",
+  "temp": 9,
   "ressenti": 9,
   "ciel": "brouillard",
   "vent": 1,
-  "min": 9,
-  "max": 16,
-  "pluie": 20,
-  "ciel_jour": "averses faibles",
-  "lever": "07:52",
-  "coucher": "17:15"
+  "min": 6,
+  "max": 12,
+  "pluie": 0,
+  "ciel_jour": "brouillard",
+  "lever": "07:54",
+  "coucher": "17:14"
  },
  "prieres": {
   "prieres": [
    {
     "nom": "Fajr",
-    "adhan": "06:04",
-    "iqama": "06:14"
+    "adhan": "06:05",
+    "iqama": "06:15"
    },
    {
     "nom": "Shuruq",
-    "adhan": "07:54",
+    "adhan": "07:55",
     "iqama": null
    },
    {
@@ -35,13 +35,13 @@
    },
    {
     "nom": "Asr",
-    "adhan": "14:52",
-    "iqama": "15:02"
+    "adhan": "14:51",
+    "iqama": "15:01"
    },
    {
     "nom": "Maghrib",
-    "adhan": "17:19",
-    "iqama": "17:24"
+    "adhan": "17:17",
+    "iqama": "17:22"
    },
    {
     "nom": "Isha",
@@ -197,8 +197,16 @@
  "corps": null,
  "agenda": [
   {
-   "heure": "journée",
-   "titre": "Taff"
+   "heure": "08 h 00",
+   "titre": "Taff (8h-15h)"
+  },
+  {
+   "heure": "17 h 00",
+   "titre": "Entraînement foot avec les petits (17h-19h)"
+  },
+  {
+   "heure": "20 h 00",
+   "titre": "Foot en club avec Ouchi (20h-22h)"
   }
  ],
  "semaine": {
@@ -272,6 +280,6 @@
    }
   ]
  },
- "texte": "Bonjour, Monsieur Amine. Nous sommes le mercredi 11 novembre. À Choisy-le-Roi, brouillard, 10 degrés, ressenti 9. Aujourd'hui : averses faibles, entre 9 et 16 degrés, 20 pour cent de risque de pluie. À votre agenda : journée, Taff. Vos priorités du jour. Premièrement : Séance de sport. Deuxièmement : Trouver des idées de tournage de vidéo. Troisièmement : Remplir les cahiers de culture. Ensuite : Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
+ "texte": "Bonjour, Monsieur Amine. Nous sommes le jeudi 12 novembre. À Choisy-le-Roi, brouillard, 9 degrés, ressenti 9. Aujourd'hui : brouillard, entre 6 et 12 degrés, 0 pour cent de risque de pluie. À votre agenda : 08 h 00, Taff (8h-15h) ; 17 h 00, Entraînement foot avec les petits (17h-19h) ; 20 h 00, Foot en club avec Ouchi (20h-22h). Vos priorités du jour. Premièrement : Séance de sport. Deuxièmement : Trouver des idées de tournage de vidéo. Troisièmement : Remplir les cahiers de culture. Ensuite : Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
  "audio": "briefing.mp3"
 }
