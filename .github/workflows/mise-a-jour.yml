@@ -13,25 +13,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install edge-tts pynacl
-      - name: Diagnostic des secrets (vrai/faux seulement)
-        env:
-          WITHINGS_CLIENT_ID: ${{ secrets.WITHINGS_CLIENT_ID }}
-          WITHINGS_CLIENT_SECRET: ${{ secrets.WITHINGS_CLIENT_SECRET }}
-          WITHINGS_REFRESH_TOKEN: ${{ secrets.WITHINGS_REFRESH_TOKEN }}
-        run: |
-          echo "ID=$([ -n "$WITHINGS_CLIENT_ID" ] && echo vrai || echo faux) SECRET=$([ -n "$WITHINGS_CLIENT_SECRET" ] && echo vrai || echo faux) REFRESH=$([ -n "$WITHINGS_REFRESH_TOKEN" ] && echo vrai || echo faux)"
-      - name: Mise à jour (météo, prières, poids Withings, voix)
-        env:
-          WITHINGS_CLIENT_ID: ${{ secrets.WITHINGS_CLIENT_ID }}
-          WITHINGS_CLIENT_SECRET: ${{ secrets.WITHINGS_CLIENT_SECRET }}
-          WITHINGS_REFRESH_TOKEN: ${{ secrets.WITHINGS_REFRESH_TOKEN }}
-        run: python maj.py
-      - name: Sauvegarder le jeton Withings renouvelé
-        if: always()
-        env:
-          GH_SECRETS_TOKEN: ${{ secrets.GH_SECRETS_TOKEN }}
-        run: python sauve_secret.py
+      - run: pip install edge-tts
+      - run: python maj.py
       - name: Publier les fichiers
         run: |
           git config user.name "batcave-bot"
