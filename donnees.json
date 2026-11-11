@@ -1,15 +1,22 @@
 {
  "date": "jeudi 12 novembre 2026",
- "genere": "2026-11-12 00:17",
- "priorites": [
-  "Séance de sport",
-  "Trouver des idées de tournage de vidéo",
-  "Remplir les cahiers de culture",
-  "Lire 15 pages de Robin des Bois"
- ],
+ "genere": "2026-11-12 00:21",
+ "meteo": {
+  "ville": "Choisy-le-Roi",
+  "source": "Open-Meteo",
+  "releve": "2026-11-12T00:15",
+  "temp": 9,
+  "ressenti": 9,
+  "ciel": "brouillard",
+  "vent": 1,
+  "min": 6,
+  "max": 12,
+  "pluie": 0,
+  "ciel_jour": "brouillard",
+  "lever": "07:54",
+  "coucher": "17:14"
+ },
  "prieres": {
-  "mosquee": "AMC Mosquée de Choisy-Le-Roi",
-  "maj": "2026-11-10 20:47",
   "prieres": [
    {
     "nom": "Fajr",
@@ -47,135 +54,135 @@
    "13:45"
   ]
  },
- "prochaine": {
-  "nom": "Fajr",
-  "adhan": "06:05",
-  "iqama": "06:15"
- },
+ "priorites": [
+  "Séance de sport",
+  "Trouver des idées de tournage de vidéo",
+  "Remplir les cahiers de culture",
+  "Lire 15 pages de Robin des Bois"
+ ],
  "classement": {
   "titre": "Classement · Choisy-le-Roi AS Senior 2",
-  "source": "FFF - epreuves.fff.fr (classement détaillé)",
   "equipe_suivie": "CHOISY LE ROI AS 2",
   "lignes": [
    {
     "rang": 1,
     "equipe": "CHAMPIGNY F.C. 94 2",
     "pts": 15,
-    "j": 6,
-    "g": 5,
+    "j": 0,
+    "g": 0,
     "n": 0,
-    "p": 1,
-    "diff": 4
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 2,
     "equipe": "BONNEUIL S/MARNE CSM 2",
     "pts": 15,
-    "j": 6,
-    "g": 5,
+    "j": 0,
+    "g": 0,
     "n": 0,
-    "p": 1,
-    "diff": 15
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 3,
     "equipe": "CACHAN CO ASC",
     "pts": 10,
-    "j": 5,
-    "g": 3,
-    "n": 1,
-    "p": 1,
-    "diff": 3
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 4,
     "equipe": "ENT.MANDRES MOLDAVIE",
     "pts": 10,
-    "j": 6,
-    "g": 3,
-    "n": 1,
-    "p": 2,
-    "diff": 2
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 5,
     "equipe": "CHOISY LE ROI AS 2",
     "pts": 9,
-    "j": 5,
-    "g": 2,
-    "n": 3,
+    "j": 0,
+    "g": 0,
+    "n": 0,
     "p": 0,
-    "diff": 3
+    "diff": 0
    },
    {
     "rang": 6,
     "equipe": "BANN'ZANMI",
     "pts": 8,
-    "j": 6,
-    "g": 2,
-    "n": 2,
-    "p": 2,
-    "diff": 2
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 7,
     "equipe": "NOGENT S/MARNE F.C. 2",
     "pts": 7,
-    "j": 6,
-    "g": 2,
-    "n": 1,
-    "p": 3,
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
     "diff": 0
    },
    {
     "rang": 8,
     "equipe": "VILLENEUVE AFC",
     "pts": 7,
-    "j": 6,
-    "g": 1,
-    "n": 4,
-    "p": 1,
-    "diff": 1
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 9,
     "equipe": "ARCUEIL COM",
     "pts": 5,
-    "j": 6,
-    "g": 1,
-    "n": 2,
-    "p": 3,
-    "diff": 1
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 10,
     "equipe": "CHARENTON CAP 3",
     "pts": 4,
-    "j": 6,
-    "g": 1,
-    "n": 1,
-    "p": 4,
-    "diff": -5
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 11,
     "equipe": "BRY F.C.",
     "pts": 4,
-    "j": 6,
-    "g": 1,
-    "n": 1,
-    "p": 4,
-    "diff": -19
+    "j": 0,
+    "g": 0,
+    "n": 0,
+    "p": 0,
+    "diff": 0
    },
    {
     "rang": 12,
     "equipe": "VITRY E.S.",
     "pts": 1,
-    "j": 6,
+    "j": 0,
     "g": 0,
-    "n": 2,
-    "p": 4,
-    "diff": -7
+    "n": 0,
+    "p": 0,
+    "diff": 0
    }
   ]
  },
@@ -183,11 +190,9 @@
   "equipe": "CHOISY LE ROI AS 2",
   "adversaire": "CACHAN CO ASC",
   "domicile": true,
+  "affiche": "dim 15 nov · 15h00",
   "date": "2026-11-15",
-  "heure": "15:00",
-  "journee": "Senior Journée 3",
-  "source": "FFF - epreuves.fff.fr (calendrier)",
-  "affiche": "dim 15 nov · 15h00"
+  "heure": "15:00"
  },
  "corps": {
   "poids_kg": 76.6,
@@ -196,18 +201,88 @@
  "agenda": [
   {
    "heure": "08 h 00",
-   "titre": "Taff (8h-15h)",
-   "fin": "15 h 00"
+   "titre": "Taff (8h-15h)"
   },
   {
    "heure": "17 h 00",
-   "titre": "Entraînement foot avec les petits (17h-19h)",
-   "fin": "19 h 00"
+   "titre": "Entraînement foot avec les petits (17h-19h)"
   },
   {
    "heure": "20 h 00",
-   "titre": "Foot en club avec Ouchi (20h-22h)",
-   "fin": "22 h 00"
+   "titre": "Foot en club avec Ouchi (20h-22h)"
   }
- ]
+ ],
+ "semaine": {
+  "lundi": [
+   {
+    "heure": "",
+    "titre": "Taff"
+   }
+  ],
+  "mardi": [
+   {
+    "heure": "08:00",
+    "fin": "15:00",
+    "titre": "Taff (8h-15h)"
+   },
+   {
+    "heure": "17:00",
+    "fin": "19:00",
+    "titre": "Entraînement foot avec les petits (17h-19h)"
+   },
+   {
+    "heure": "20:00",
+    "fin": "22:00",
+    "titre": "Foot en club avec Ouchi (20h-22h)"
+   }
+  ],
+  "mercredi": [
+   {
+    "heure": "",
+    "titre": "Taff"
+   }
+  ],
+  "jeudi": [
+   {
+    "heure": "08:00",
+    "fin": "15:00",
+    "titre": "Taff (8h-15h)"
+   },
+   {
+    "heure": "17:00",
+    "fin": "19:00",
+    "titre": "Entraînement foot avec les petits (17h-19h)"
+   },
+   {
+    "heure": "20:00",
+    "fin": "22:00",
+    "titre": "Foot en club avec Ouchi (20h-22h)"
+   }
+  ],
+  "vendredi": [
+   {
+    "heure": "09:00",
+    "fin": "17:00",
+    "titre": "École (9h-17h)"
+   }
+  ],
+  "samedi": [
+   {
+    "heure": "matin",
+    "titre": "Match avec les petits"
+   }
+  ],
+  "dimanche": [
+   {
+    "heure": "matin",
+    "titre": "Taff"
+   },
+   {
+    "heure": "après-midi",
+    "titre": "Match avec Ouchi"
+   }
+  ]
+ },
+ "texte": "Bonjour, Monsieur Amine. Nous sommes le jeudi 12 novembre. À Choisy-le-Roi, brouillard, 9 degrés, ressenti 9. Aujourd'hui : brouillard, entre 6 et 12 degrés, 0 pour cent de risque de pluie. À votre agenda : 08 h 00, Taff (8h-15h) ; 17 h 00, Entraînement foot avec les petits (17h-19h) ; 20 h 00, Foot en club avec Ouchi (20h-22h). Vos priorités du jour. Premièrement : Séance de sport. Deuxièmement : Trouver des idées de tournage de vidéo. Troisièmement : Remplir les cahiers de culture. Ensuite : Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
+ "audio": "briefing.mp3"
 }
