@@ -1,0 +1,202 @@
+{
+ "date": "mercredi 11 novembre 2026",
+ "genere": "2026-11-11 16:38",
+ "priorites": [
+  "Séance de sport",
+  "Trouver des idées de tournage de vidéo",
+  "Remplir les cahiers de culture",
+  "Lire 15 pages de Robin des Bois"
+ ],
+ "prieres": {
+  "mosquee": "AMC Mosquée de Choisy-Le-Roi",
+  "maj": "2026-11-10 20:47",
+  "prieres": [
+   {
+    "nom": "Fajr",
+    "adhan": "06:04",
+    "iqama": "06:14"
+   },
+   {
+    "nom": "Shuruq",
+    "adhan": "07:54",
+    "iqama": null
+   },
+   {
+    "nom": "Dhuhr",
+    "adhan": "12:36",
+    "iqama": "12:46"
+   },
+   {
+    "nom": "Asr",
+    "adhan": "14:52",
+    "iqama": "15:02"
+   },
+   {
+    "nom": "Maghrib",
+    "adhan": "17:19",
+    "iqama": "17:24"
+   },
+   {
+    "nom": "Isha",
+    "adhan": "19:00",
+    "iqama": "19:00"
+   }
+  ],
+  "jumua": [
+   "12:45",
+   "13:45"
+  ]
+ },
+ "prochaine": {
+  "nom": "Maghrib",
+  "adhan": "17:19",
+  "iqama": "17:24"
+ },
+ "classement": {
+  "titre": "Classement · Choisy-le-Roi AS Senior 2",
+  "source": "FFF - epreuves.fff.fr (classement détaillé)",
+  "equipe_suivie": "CHOISY LE ROI AS 2",
+  "lignes": [
+   {
+    "rang": 1,
+    "equipe": "CHAMPIGNY F.C. 94 2",
+    "pts": 15,
+    "j": 6,
+    "g": 5,
+    "n": 0,
+    "p": 1,
+    "diff": 4
+   },
+   {
+    "rang": 2,
+    "equipe": "BONNEUIL S/MARNE CSM 2",
+    "pts": 15,
+    "j": 6,
+    "g": 5,
+    "n": 0,
+    "p": 1,
+    "diff": 15
+   },
+   {
+    "rang": 3,
+    "equipe": "CACHAN CO ASC",
+    "pts": 10,
+    "j": 5,
+    "g": 3,
+    "n": 1,
+    "p": 1,
+    "diff": 3
+   },
+   {
+    "rang": 4,
+    "equipe": "ENT.MANDRES MOLDAVIE",
+    "pts": 10,
+    "j": 6,
+    "g": 3,
+    "n": 1,
+    "p": 2,
+    "diff": 2
+   },
+   {
+    "rang": 5,
+    "equipe": "CHOISY LE ROI AS 2",
+    "pts": 9,
+    "j": 5,
+    "g": 2,
+    "n": 3,
+    "p": 0,
+    "diff": 3
+   },
+   {
+    "rang": 6,
+    "equipe": "BANN'ZANMI",
+    "pts": 8,
+    "j": 6,
+    "g": 2,
+    "n": 2,
+    "p": 2,
+    "diff": 2
+   },
+   {
+    "rang": 7,
+    "equipe": "NOGENT S/MARNE F.C. 2",
+    "pts": 7,
+    "j": 6,
+    "g": 2,
+    "n": 1,
+    "p": 3,
+    "diff": 0
+   },
+   {
+    "rang": 8,
+    "equipe": "VILLENEUVE AFC",
+    "pts": 7,
+    "j": 6,
+    "g": 1,
+    "n": 4,
+    "p": 1,
+    "diff": 1
+   },
+   {
+    "rang": 9,
+    "equipe": "ARCUEIL COM",
+    "pts": 5,
+    "j": 6,
+    "g": 1,
+    "n": 2,
+    "p": 3,
+    "diff": 1
+   },
+   {
+    "rang": 10,
+    "equipe": "CHARENTON CAP 3",
+    "pts": 4,
+    "j": 6,
+    "g": 1,
+    "n": 1,
+    "p": 4,
+    "diff": -5
+   },
+   {
+    "rang": 11,
+    "equipe": "BRY F.C.",
+    "pts": 4,
+    "j": 6,
+    "g": 1,
+    "n": 1,
+    "p": 4,
+    "diff": -19
+   },
+   {
+    "rang": 12,
+    "equipe": "VITRY E.S.",
+    "pts": 1,
+    "j": 6,
+    "g": 0,
+    "n": 2,
+    "p": 4,
+    "diff": -7
+   }
+  ]
+ },
+ "match": {
+  "equipe": "CHOISY LE ROI AS 2",
+  "adversaire": "CACHAN CO ASC",
+  "domicile": true,
+  "date": "2026-11-15",
+  "heure": "15:00",
+  "journee": "Senior Journée 3",
+  "source": "FFF - epreuves.fff.fr (calendrier)",
+  "affiche": "dim 15 nov · 15h00"
+ },
+ "corps": {
+  "poids_kg": 75.8,
+  "masse_grasse_pct": 13.1
+ },
+ "agenda": [
+  {
+   "heure": "journée",
+   "titre": "Taff"
+  }
+ ]
+}
