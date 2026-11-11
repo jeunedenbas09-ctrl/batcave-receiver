@@ -8,7 +8,818 @@
   @property --balai { syntax: "<angle>"; inherits: false; initial-value: 360deg; }
   :root {
     --nuit:#020611; --marine:#07122b; --bleu:#2f7bff; --azur:#3fa2ff; --glace:#a8d3ff; --blanc:#eef5ff;
+    --alerte:#ff4f4f; --doux:#6f88b5; --ombre:#3a4f7a;<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Batcave OS — Alfred</title>
+<style>
+  @property --balai { syntax: "<angle>"; inherits: false; initial-value: 360deg; }
+  :root {
+    --nuit:#020611; --marine:#07122b; --bleu:#2f7bff; --azur:#3fa2ff; --glace:#a8d3ff; --blanc:#eef5ff;
     --alerte:#ff4f4f; --doux:#6f88b5; --ombre:#3a4f7a;
+    --trait:rgba(72,140,255,.26); --trait2:rgba(72,140,255,.11);
+    --hud:"Bahnschrift","Segoe UI",Arial,sans-serif; --mono:"Cascadia Mono","Consolas","Lucida Console",monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--nuit); color: var(--blanc); font-family: var(--hud); overflow: hidden; }
+  body.fige *, body.fige *::before, body.fige *::after { animation: none !important; transition: none !important; }
+  body:not(.anim):not(.fige) #intro, body:not(.anim):not(.fige) #sonar { visibility: hidden; }   /* rien ne s'affiche avant le top départ */
+  #sonar { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  body.anim #sonar { animation: fondu 1.6s .2s ease both; }
+  .voile { position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(95vh 70vh at 50% 44%, rgba(47,123,255,.17), transparent 64%),
+                radial-gradient(70vh 50vh at 0% 100%, rgba(47,123,255,.10), transparent 62%),
+                radial-gradient(70vh 50vh at 100% 0%, rgba(47,123,255,.08), transparent 62%),
+                radial-gradient(ellipse at center, transparent 52%, rgba(0,2,8,.78) 100%); }
+  .trames { position: fixed; inset: 0; z-index: 9; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(168,211,255,.028) 0 1px, transparent 1px 3px); }
+  @keyframes fondu { from { opacity: 0; } }
+  @keyframes tourne { to { transform: rotate(360deg); } }
+  @keyframes pouls { 50% { transform: scale(1.55); opacity: .55; } }
+  .k { color: var(--doux); font: 500 1.25vh var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+  .vide { color: var(--doux); font-size: 1.9vh; line-height: 1.5; }
+
+  /* ================= INTRO : amorçage ================= */
+  #intro { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; pointer-events: none; }
+  .allumage { position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: linear-gradient(90deg, transparent, #fff 30%, #fff 70%, transparent); opacity: 0; }
+  body.anim .allumage { animation: allumage 1.2s ease-out both; }
+  @keyframes allumage { 0% { transform: scaleX(0); opacity: 1; } 40% { transform: scaleX(1); opacity: 1; } 100% { transform: scale(1, 90); opacity: 0; } }
+  .scene { text-align: center; transform: translateY(-3vh); }
+  .embZone { position: relative; width: 34vh; height: 34vh; margin: 0 auto; }
+  .ping { position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--azur); opacity: 0; }
+  body.anim .ping { animation: ping 2.8s ease-out infinite; }
+  body.anim .ping.p2 { animation-delay: .9s; } body.anim .ping.p3 { animation-delay: 1.8s; }
+  @keyframes ping { from { transform: scale(.4); opacity: .8; } to { transform: scale(2.1); opacity: 0; } }
+  .orbite { position: absolute; inset: 0; border-radius: 50%; border: 1px dashed rgba(63,162,255,.5); animation: tourne 18s linear infinite; }
+  .orbite.o2 { inset: 8%; border: 2px solid transparent; border-top-color: var(--glace); border-right-color: var(--azur); animation-duration: 3.4s; animation-direction: reverse; }
+  .orbite.o3 { inset: -10%; border: 1px dotted rgba(168,211,255,.28); animation-duration: 46s; }
+  #embleme { position: absolute; inset: 17%; width: 66%; height: 66%; filter: drop-shadow(0 0 3vh rgba(47,123,255,.9)); overflow: visible; }
+  .hexTrait { fill: none; stroke: url(#gTrait); stroke-width: 6; stroke-linejoin: round; }
+  .hexPlein { fill: url(#gPlein); }
+  .hex94 { font: 700 84px var(--hud); fill: #fff; text-anchor: middle; }
+  #embleme .hexTrait { stroke-dasharray: 640; }
+  body.anim .embZone { animation: surgit 1s .2s cubic-bezier(.2,.8,.2,1) both; }
+  body.anim #embleme .hexTrait { animation: trace 1.9s .45s cubic-bezier(.6,.1,.2,1) both; }
+  body.anim #embleme .hexPlein { animation: fondu .7s 2s ease both; }
+  body.anim #embleme .hex94 { animation: fondu .5s 2.35s ease both; }
+  @keyframes surgit { from { opacity: 0; transform: scale(.55); } }
+  @keyframes trace { from { stroke-dashoffset: 640; } }
+  .titre { margin-top: 3.4vh; font-size: 6vh; font-weight: 700; letter-spacing: .5em; padding-left: .5em; min-height: 7.2vh; text-shadow: 0 0 3vh rgba(63,162,255,.8); }
+  body.anim .titre { animation: titreIn 1.2s 1.45s ease both; }
+  @keyframes titreIn { from { opacity: 0; letter-spacing: 1em; } }
+  .sousT { margin-top: 1.2vh; color: var(--azur); font-size: 2vh; letter-spacing: .46em; padding-left: .46em; }
+  .sousT i { display: inline-block; width: .9vh; height: 2vh; margin-left: .6vh; background: var(--glace); vertical-align: -.3vh; animation: clignote 1s steps(1) infinite; }
+  body.anim .sousT { animation: fondu .8s 3s ease both; }
+  @keyframes clignote { 50% { opacity: 0; } }
+  .journal { position: absolute; left: 3vw; bottom: 5vh; width: 32vw; font: 500 1.35vh var(--mono); letter-spacing: .08em; color: var(--doux); display: grid; gap: .55vh; }
+  .lg { display: flex; align-items: baseline; gap: .6vw; white-space: nowrap; }
+  .lg::before { content: ">"; color: var(--azur); }
+  .lg i { flex: 1; border-bottom: 1px dotted var(--ombre); transform: translateY(-.3vh); }
+  .lg b { color: var(--glace); font-weight: 600; } .lg b.ko { color: #ff9a9a; }
+  body.anim .lg { animation: taper .45s steps(28) both; animation-delay: calc(.7s + var(--i) * .46s); }
+  @keyframes taper { from { clip-path: inset(0 100% 0 0); } }
+  .amorce { position: absolute; right: 3vw; bottom: 5vh; width: 25vw; font: 500 1.3vh var(--mono); letter-spacing: .2em; color: var(--doux); display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1vw; }
+  .amorce div { height: .5vh; background: var(--trait2); }
+  .amorce div i { display: block; height: 100%; background: linear-gradient(90deg, var(--bleu), var(--glace)); box-shadow: 0 0 1vh var(--azur); }
+  body.anim .amorce div i { animation: remplit 4.3s .35s cubic-bezier(.4,0,.3,1) both; }
+  @keyframes remplit { from { width: 0; } }
+  .amorce b { color: var(--blanc); min-width: 3.4vw; text-align: right; }
+  .version { position: absolute; top: 4vh; left: 3vw; right: 3vw; display: flex; justify-content: space-between; font: 500 1.25vh var(--mono); letter-spacing: .22em; color: var(--ombre); text-transform: uppercase; }
+  #intro.fin > :not(.scene), #intro.fin .scene > :not(.embZone), #intro.fin .ping, #intro.fin .orbite { opacity: 0 !important; transition: opacity .35s ease; }
+
+  /* ================= TABLEAU DE BORD ================= */
+  #tableau { position: fixed; inset: 0; z-index: 2; padding: 3vh 2.6vw 2.4vh; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 1.6vh; visibility: hidden; }
+  #tableau.visible { visibility: visible; }
+  header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 2vw; padding-bottom: 1.3vh; position: relative; border-bottom: 1px solid var(--trait); }
+  header::before, header::after { content: ""; position: absolute; bottom: -1px; height: 2px; width: 16%; }
+  header::before { left: 0; background: linear-gradient(90deg, var(--azur), transparent); }
+  header::after { right: 0; background: linear-gradient(270deg, var(--azur), transparent); }
+  .marque { display: flex; align-items: center; gap: 1.1vw; }
+  .marque svg { width: 7.2vh; height: 7.2vh; overflow: visible; filter: drop-shadow(0 0 1.4vh rgba(47,123,255,.75)); }
+  .marque b { display: block; font-size: 3.1vh; letter-spacing: .36em; font-weight: 700; }
+  .marque span { display: block; margin-top: .3vh; color: var(--azur); font-size: 1.45vh; letter-spacing: .42em; }
+  .voyants { display: flex; gap: 1.5vw; font: 500 1.3vh var(--mono); letter-spacing: .14em; color: var(--doux); }
+  .voyants span { display: flex; align-items: center; gap: .45vw; }
+  .voyants i { width: .9vh; height: .9vh; border-radius: 50%; background: var(--azur); box-shadow: 0 0 1vh var(--azur); }
+  .voyants .ko { color: #ff9a9a; } .voyants .ko i { background: var(--alerte); box-shadow: 0 0 1vh var(--alerte); }
+  .voyants .mi i { background: var(--ombre); box-shadow: none; }
+  .quand { text-align: right; }
+  .quand .date { font-size: 2.5vh; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; }
+  .quand .lieu { margin-top: .5vh; color: var(--doux); font: 500 1.3vh var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+
+  main { display: grid; grid-template-columns: 27fr 46fr 27fr; gap: 1.4vw; min-height: 0; }
+  .col { display: flex; flex-direction: column; gap: 1.4vh; min-height: 0; min-width: 0; }
+  .gauche .panel { --dx: -3vw; --dy: 0vh; } .droite .panel { --dx: 3vw; --dy: 0vh; } .centre .panel { --dx: 0vw; --dy: 3vh; }
+  #meteo { flex: 1.06 1 0; } #agendaP { flex: .94 1 0; } #prios { flex: 1 1 0; display: flex; flex-direction: column; } #prieresP { flex: 1.42 1 0; } #lecteurP { flex: .72 1 0; }
+
+  .panel { position: relative; min-height: 0; overflow: hidden; padding: 1.8vh 1.3vw 1.5vh;
+    background: linear-gradient(165deg, rgba(10,25,60,.70), rgba(3,8,22,.86)); border: 1px solid var(--trait);
+    box-shadow: inset 0 0 6vh rgba(47,123,255,.08), inset 0 1px 0 rgba(168,211,255,.12), 0 1.2vh 4vh rgba(0,0,0,.5); }
+  .panel::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(var(--glace), var(--glace)) top left / 2.4vh 2px no-repeat, linear-gradient(var(--glace), var(--glace)) top left / 2px 2.4vh no-repeat,
+                linear-gradient(var(--glace), var(--glace)) bottom right / 2.4vh 2px no-repeat, linear-gradient(var(--glace), var(--glace)) bottom right / 2px 2.4vh no-repeat; }
+  .panel::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 45%; pointer-events: none; opacity: 0;
+    background: linear-gradient(100deg, transparent, rgba(168,211,255,.16), transparent); }
+  .panel h2 { display: flex; align-items: center; gap: .8vw; font-size: 1.55vh; font-weight: 600; letter-spacing: .32em; color: var(--glace); margin-bottom: 1.4vh; white-space: nowrap; }
+  .panel h2 i { font: 600 1.2vh var(--mono); font-style: normal; letter-spacing: .05em; color: var(--nuit); background: var(--azur); padding: .3vh .5vw .3vh .4vw; clip-path: polygon(0 0, 100% 0, 100% 55%, 80% 100%, 0 100%); }
+  .panel h2::after { content: ""; order: 2; flex: 1; height: 1px; background: linear-gradient(90deg, var(--trait), transparent); }
+  .panel h2 em { order: 3; font: 500 1.2vh var(--mono); font-style: normal; color: var(--doux); letter-spacing: .1em; text-transform: uppercase; }
+
+  /* --- assemblage (seulement en direct) --- */
+  body.anim #tableau.visible header { animation: descend .7s cubic-bezier(.2,.8,.2,1) both; }
+  body.anim #tableau.visible .panel { animation: deploie .85s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(.25s + var(--o, 0) * .13s); }
+  body.anim #tableau.visible .panel::before { animation: coins .9s ease both; animation-delay: calc(.6s + var(--o, 0) * .13s); }
+  body.anim #tableau.visible .panel::after { animation: reflet 1.2s ease both; animation-delay: calc(.55s + var(--o, 0) * .13s); }
+  body.anim #tableau.visible .st { animation: monte .55s ease both; animation-delay: calc(.65s + var(--o, 0) * .13s + var(--i, 0) * .07s); }
+  body.anim #tableau.visible #noyau { animation: noyauIn 1.15s .05s cubic-bezier(.2,.8,.2,1) both; }
+  body.anim #tableau.visible #cadran { animation: balai 1.6s .3s cubic-bezier(.5,0,.2,1) both; }
+  body.anim #tableau.visible .repere { animation: monte .6s 1.3s ease both; }
+  body.anim #tableau.visible footer { animation: monte .7s .95s cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes descend { from { opacity: 0; transform: translateY(-2.4vh); } }
+  @keyframes deploie { from { opacity: 0; transform: translate(var(--dx, 0), var(--dy, 2.5vh)) scale(.97); filter: blur(8px) brightness(2.2); } }
+  @keyframes coins { from { background-size: 0 2px, 2px 0, 0 2px, 2px 0; } }
+  @keyframes reflet { from { transform: translateX(-130%) skewX(-18deg); opacity: 1; } to { transform: translateX(260%) skewX(-18deg); opacity: 1; } }
+  @keyframes monte { from { opacity: 0; transform: translateY(1.6vh); } }
+  @keyframes noyauIn { from { opacity: 0; transform: scale(.55) rotate(-28deg); filter: blur(10px); } }
+  @keyframes balai { from { --balai: 0deg; } }
+
+  /* --- météo --- */
+  .mHaut { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1vw; }
+  .icone { width: 9.5vh; height: 9.5vh; color: var(--glace); filter: drop-shadow(0 0 1vh rgba(63,162,255,.85)); }
+  .icone svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+  .icone .rayons { animation: tourne 18s linear infinite; }
+  .icone .gouttes path { animation: goutte 1.1s linear infinite; } .icone .gouttes path:nth-child(2) { animation-delay: .35s; } .icone .gouttes path:nth-child(3) { animation-delay: .7s; }
+  .icone .flocons circle { fill: currentColor; animation: goutte 2.2s linear infinite; } .icone .flocons circle:nth-child(2) { animation-delay: .7s; } .icone .flocons circle:nth-child(3) { animation-delay: 1.4s; }
+  .icone .eclair { fill: #fff; stroke: none; animation: eclair 2.8s steps(1) infinite; }
+  .icone .brume path { animation: derive 4s ease-in-out infinite alternate; } .icone .brume path:nth-child(even) { animation-direction: alternate-reverse; }
+  @keyframes goutte { from { transform: translate(2px, -3px); opacity: 0; } 25% { opacity: 1; } to { transform: translate(-4px, 12px); opacity: 0; } }
+  @keyframes eclair { 0% { opacity: .2; } 6% { opacity: 1; } 10% { opacity: .25; } 14% { opacity: 1; } 22% { opacity: .3; } 100% { opacity: .3; } }
+  @keyframes derive { from { transform: translateX(-4px); } to { transform: translateX(5px); } }
+  .temp { font-size: 8.6vh; font-weight: 700; line-height: .86; font-variant-numeric: tabular-nums; text-shadow: 0 0 3vh rgba(63,162,255,.6); white-space: nowrap; }
+  .temp sup { font-size: .3em; color: var(--azur); vertical-align: top; margin-left: .12em; position: relative; top: .3em; }
+  .ciel { margin-top: .9vh; font-size: 2.1vh; text-transform: capitalize; }
+  .cielJ { margin-top: .2vh; font-size: 1.45vh; color: var(--doux); }
+  .jauge { position: relative; width: 11.5vh; height: 11.5vh; }
+  .jauge svg { width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
+  .jauge .jf { fill: none; stroke: var(--trait2); stroke-width: 8; }
+  .jauge .jv { fill: none; stroke: var(--azur); stroke-width: 8; stroke-linecap: round; filter: drop-shadow(0 0 6px var(--azur)); transition: stroke-dashoffset 1.7s cubic-bezier(.2,.8,.2,1) .5s; }
+  .jauge .jt { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+  .jauge .jt b { font-size: 3.1vh; font-variant-numeric: tabular-nums; } .jauge .jt > span { color: var(--doux); font: 500 1.15vh var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+  .plage { margin-top: 1.9vh; }
+  .plage .lgd { display: flex; justify-content: space-between; font: 500 1.2vh var(--mono); letter-spacing: .12em; color: var(--doux); text-transform: uppercase; }
+  .plage .rail { position: relative; height: .7vh; margin: .9vh .85vh .6vh; background: linear-gradient(90deg, #17408f, #3fa2ff 55%, #eef5ff); border-radius: 1vh; }
+  .plage .rail i { position: absolute; top: 50%; width: 1.7vh; height: 1.7vh; margin: -.85vh 0 0 -.85vh; border-radius: 50%; background: var(--nuit); border: .35vh solid #fff; box-shadow: 0 0 1.2vh var(--azur); transition: left 1.5s cubic-bezier(.2,.8,.2,1) .6s; }
+  .plage .bornes { display: flex; justify-content: space-between; font-size: 1.9vh; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 1vw; margin-top: 1.5vh; }
+  .duo div { padding: .7vh .8vw; border-left: 2px solid var(--azur); background: linear-gradient(90deg, rgba(47,123,255,.14), transparent); }
+  .duo b { display: block; font-size: 2.5vh; font-variant-numeric: tabular-nums; }
+
+  /* --- agenda --- */
+  #agenda { position: relative; display: grid; gap: 1.1vh; align-content: start; padding-left: 1.5vw; }
+  #agenda::before { content: ""; position: absolute; left: .35vw; top: .6vh; bottom: .6vh; width: 1px; background: linear-gradient(var(--azur), var(--trait) 75%, transparent); }
+  .ev { position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .9vw; padding: .75vh .7vw; background: rgba(47,123,255,.07); border: 1px solid transparent; }
+  .ev::before { content: ""; position: absolute; left: calc(-1.15vw - .5vh); top: 50%; width: 1vh; height: 1vh; margin-top: -.5vh; border-radius: 50%; background: var(--nuit); border: 2px solid var(--azur); }
+  .ev .eh { font: 600 2vh var(--hud); font-variant-numeric: tabular-nums; color: var(--glace); min-width: 3.5vw; }
+  .ev .eh small { display: block; font-size: 1.3vh; color: var(--doux); font-weight: 500; }
+  .ev .et { font-size: 2vh; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .ev .es { font: 500 1.05vh var(--mono); letter-spacing: .14em; color: var(--doux); border: 1px solid var(--trait); padding: .3vh .4vw; white-space: nowrap; }
+  .ev.passe { opacity: .45; }
+  .ev.cours { border-color: var(--azur); background: linear-gradient(90deg, rgba(63,162,255,.24), rgba(63,162,255,.04)); box-shadow: 0 0 2vh rgba(47,123,255,.3); }
+  .ev.cours .es { color: var(--nuit); background: var(--glace); border-color: var(--glace); }
+  .ev.cours::before { background: #fff; border-color: #fff; box-shadow: 0 0 1.2vh #fff; }
+  .ev.suiv .es { color: var(--glace); border-color: var(--azur); }
+
+  /* --- noyau : cadran du jour --- */
+  #noyauZone { flex: 0 0 44vh; position: relative; display: grid; place-items: center; min-height: 0; }
+  #noyau { position: relative; height: 100%; aspect-ratio: 1; }
+  #barres { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #cadran { position: absolute; top: 0; left: -12.5%; width: 125%; height: 100%; overflow: visible;
+    -webkit-mask-image: conic-gradient(from 180deg, #000 var(--balai), transparent var(--balai)); mask-image: conic-gradient(from 180deg, #000 var(--balai), transparent var(--balai)); }
+  #cadran .orb { fill: none; stroke: var(--trait); }
+  #cadran .grad { fill: none; stroke: rgba(111,136,181,.6); } #cadran .grad6 { fill: none; stroke: var(--glace); stroke-width: 2; }
+  #cadran .hh { fill: var(--doux); font: 500 12.5px var(--mono); text-anchor: middle; dominant-baseline: central; } #cadran .hh.fort { fill: var(--glace); }
+  #cadran .jour { fill: none; stroke: url(#gJour); stroke-width: 4; stroke-linecap: round; }
+  #cadran .jourLueur { fill: none; stroke: var(--azur); stroke-width: 11; opacity: .5; filter: url(#lueur); }
+  #cadran .creneau { fill: none; stroke: rgba(63,162,255,.34); stroke-width: 10; }
+  #cadran .creneau.court { stroke: var(--azur); stroke-width: 2; }
+  #cadran .creneau.passe { stroke: rgba(63,162,255,.14); }
+  #cadran .creneau.cours { stroke: rgba(200,228,255,.9); filter: drop-shadow(0 0 6px var(--azur)); }
+  #cadran .pr line { stroke: var(--azur); stroke-width: 2; }
+  #cadran .pr .pt { fill: var(--nuit); stroke: var(--azur); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
+  #cadran .pr text { fill: var(--glace); font: 600 14.5px var(--hud); letter-spacing: 2px; dominant-baseline: central; }
+  #cadran .pr.passe { opacity: .42; }
+  #cadran .pr.suiv line { stroke: #fff; } #cadran .pr.suiv text { fill: #fff; }
+  #cadran .pr.suiv .pt { fill: #fff; stroke: #fff; animation: pouls 1.8s ease-in-out infinite; }
+  #cadran .tourne { transform-origin: 320px 320px; animation: tourne 150s linear infinite; }
+  #cadran .tourne.inverse { animation-duration: 34s; animation-direction: reverse; }
+  #cadran .pointille { fill: none; stroke: rgba(63,162,255,.45); stroke-dasharray: 2 9; }
+  #cadran .arcs3 { fill: none; stroke: var(--azur); stroke-width: 1.5; stroke-dasharray: 150 145.3; opacity: .7; }
+  #cadran .fin { fill: none; stroke: var(--trait); } #cadran .sec60 { fill: none; stroke: rgba(168,211,255,.5); stroke-width: 3; stroke-dasharray: 1.5 15.046; }
+  #cadran .arcSec { fill: none; stroke: #fff; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 955.04; filter: drop-shadow(0 0 4px var(--azur)); }
+  #aiguille { transform-origin: 320px 320px; }
+  #aiguille line { stroke: var(--alerte); stroke-width: 2; } #aiguille path { fill: var(--alerte); }
+  #aiguille circle { fill: #fff; stroke: var(--alerte); stroke-width: 2; filter: drop-shadow(0 0 5px var(--alerte)); }
+  .coeur { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -52%); width: 46%; text-align: center; pointer-events: none; }
+  .coeur .lbl { display: block; font: 500 1.1vh var(--mono); letter-spacing: .3em; color: var(--doux); }
+  .coeur b { display: block; margin-top: .5vh; font-size: 7.8vh; font-weight: 700; line-height: 1; font-stretch: 88%; font-variant-numeric: tabular-nums; text-shadow: 0 0 3vh rgba(63,162,255,.8); }
+  .coeur .sec { display: block; margin-top: .4vh; min-height: 2.2vh; font: 600 1.9vh var(--mono); color: var(--azur); letter-spacing: .2em; }
+  .repere { position: absolute; width: 27%; }
+  .repere span { display: block; font: 500 1.15vh var(--mono); letter-spacing: .14em; color: var(--doux); text-transform: uppercase; }
+  .repere b { margin-top: .3vh; font-size: 2.2vh; font-weight: 600; line-height: 1.15; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .repere small { display: block; margin-top: .2vh; font-size: 1.4vh; color: var(--glace); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .repere::before { content: ""; display: block; width: 3vw; height: 2px; margin-bottom: .8vh; background: var(--azur); box-shadow: 0 0 1vh var(--azur); }
+  .r1 { left: 0; top: .6vh; } .r3 { left: 0; bottom: .6vh; }
+  .r2 { right: 0; top: .6vh; text-align: right; } .r4 { right: 0; bottom: .6vh; text-align: right; }
+  .r2::before, .r4::before { margin-left: auto; }
+
+  /* --- priorités --- */
+  .prios { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; gap: .9vh 1vw; }
+  .prios.seul { grid-template-columns: 1fr; }
+  .pr { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: .9vw; padding: .6vh .8vw; min-height: 0; border-left: 2px solid var(--azur); background: linear-gradient(90deg, rgba(47,123,255,.14), rgba(47,123,255,.02)); }
+  .pr b { display: grid; place-items: center; width: 4.3vh; height: 4.3vh; font: 700 1.6vh var(--mono); color: var(--blanc); background: rgba(63,162,255,.24); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+  .pr span { font-size: 2.05vh; line-height: 1.22; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* --- prières --- */
+  .pLigne { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 1.2vw; padding: .36vh .5vw; border-bottom: 1px solid var(--trait2); }
+  .pLigne .pn { font-size: 2.05vh; letter-spacing: .05em; }
+  .pLigne .ph { text-align: right; min-width: 4.2vw; }
+  .pLigne .ph b { display: block; font-size: 2.2vh; font-weight: 700; line-height: 1.05; font-variant-numeric: tabular-nums; }
+  .pLigne .ph small { font: 500 1.05vh var(--mono); letter-spacing: .16em; color: var(--doux); text-transform: uppercase; }
+  .pLigne.lever .pn, .pLigne.lever b { color: var(--doux); font-weight: 500; }
+  .pLigne.passe { opacity: .42; }
+  .pLigne.suiv { background: linear-gradient(90deg, rgba(63,162,255,.26), rgba(63,162,255,.03)); border-bottom-color: var(--azur); box-shadow: inset 2px 0 0 #fff; }
+  .pLigne.suiv .pn, .pLigne.suiv b { color: #fff; text-shadow: 0 0 1.2vh rgba(63,162,255,.95); }
+  .compte { margin-top: .8vh; padding: .6vh .8vw .5vh; border: 1px solid var(--trait); background: rgba(47,123,255,.08); }
+  .compte .cH { display: flex; justify-content: space-between; align-items: baseline; gap: 1vw; }
+  .compte .cH b { font-size: 2.4vh; letter-spacing: .06em; white-space: nowrap; }
+  .compte .cT { margin-top: .1vh; font-size: 1.6vh; color: var(--glace); text-align: right; }
+  .rail2 { height: .5vh; margin: .5vh 0 .4vh; background: var(--trait2); overflow: hidden; }
+  .rail2 i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--bleu), var(--glace)); box-shadow: 0 0 1vh var(--azur); transition: width 1.3s ease; }
+  .compte .cB { display: flex; justify-content: space-between; font: 500 1.1vh var(--mono); letter-spacing: .1em; color: var(--doux); text-transform: uppercase; }
+
+  /* --- lecteur --- */
+  .lecteur { display: grid; grid-template-columns: auto 1fr; gap: 1.1vw; align-items: center; cursor: pointer; }
+  .cadreP { position: relative; width: 15vh; height: 15vh; border: 1px solid var(--azur); box-shadow: 0 0 2.4vh rgba(47,123,255,.5); background: linear-gradient(135deg, #0c1d45, #040b1e); overflow: hidden; will-change: transform; }
+  .cadreP img { position: relative; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cadreP svg { position: absolute; inset: 22%; width: 56%; height: 56%; fill: none; stroke: var(--azur); stroke-width: 3; opacity: .7; }
+  .cadreP::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(2,6,17,.5)), repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 3px); }
+  .pInfos { min-width: 0; }
+  .pInfos .tt { margin-top: .4vh; font-size: 2.15vh; font-weight: 700; line-height: 1.15; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .pInfos .ar { display: block; margin-top: .2vh; font-size: 1.7vh; color: var(--glace); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .eq { display: flex; align-items: flex-end; gap: .2vw; height: 3.2vh; margin-top: .9vh; }
+  .eq i { flex: 1; height: 100%; transform-origin: bottom; transform: scaleY(.06); background: linear-gradient(var(--glace), var(--bleu)); }
+  .rail3 { height: .35vh; margin-top: .8vh; background: var(--trait2); } .rail3 i { display: block; height: 100%; width: 0; background: var(--glace); box-shadow: 0 0 .8vh var(--azur); }
+  .tps { display: flex; justify-content: space-between; margin-top: .4vh; font: 500 1.1vh var(--mono); color: var(--doux); letter-spacing: .1em; }
+  .suite { margin-top: .9vh; font: 500 1.1vh var(--mono); letter-spacing: .1em; color: var(--doux); text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* --- pied : Alfred, sous-titres --- */
+  footer { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 2vw; padding-top: 1.3vh; border-top: 1px solid var(--trait); min-height: 8.8vh; }
+  .alfred { display: flex; align-items: center; gap: 1vw; min-width: 11vw; }
+  .orbe { position: relative; width: 4.4vh; height: 4.4vh; border-radius: 50%; border: 1px solid var(--azur); display: grid; place-items: center; }
+  .orbe i { width: 1.5vh; height: 1.5vh; border-radius: 50%; background: var(--glace); box-shadow: 0 0 1.6vh var(--azur); }
+  .orbe::before { content: ""; position: absolute; inset: -.6vh; border-radius: 50%; border: 1px solid var(--trait); border-top-color: var(--glace); animation: tourne 3.2s linear infinite; }
+  body.parle .orbe i { background: #fff; animation: pouls .7s ease-in-out infinite; }
+  .alfred b { display: block; font-size: 1.8vh; letter-spacing: .34em; }
+  .alfred span { font: 500 1.1vh var(--mono); letter-spacing: .16em; color: var(--doux); }
+  body.parle .alfred span { color: var(--glace); }
+  .sous { min-height: 7.4vh; display: grid; place-items: center; text-align: center; font-size: 2.75vh; line-height: 1.32; }
+  .sous .cue { animation: monte .3s ease both; }
+  .sous .w { color: rgba(168,211,255,.36); transition: color .12s; }
+  .sous .w.dit { color: var(--blanc); }
+  .sous .w.vif { color: #fff; text-shadow: 0 0 1.4vh rgba(63,162,255,.95); }
+  .sous.repos { font-size: 2vh; color: var(--doux); letter-spacing: .1em; }
+  button { background: rgba(47,123,255,.14); color: var(--blanc); border: 1px solid var(--azur); padding: 1.2vh 1.7vw; font: 600 1.6vh var(--hud); letter-spacing: .26em; cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 1.2vh) 0, 100% 1.2vh, 100% 100%, 1.2vh 100%, 0 calc(100% - 1.2vh)); transition: background .2s, color .2s; }
+  button:hover { background: var(--azur); color: var(--nuit); }
+
+  @media (max-aspect-ratio: 1/1) {
+    html, body { overflow: auto; }
+    #tableau { position: relative; min-height: 100%; }
+    header, main, footer { grid-template-columns: 1fr; }
+    .quand { text-align: left; } .voyants { flex-wrap: wrap; }
+    .panel { flex: none !important; } .repere { display: none; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="gTrait" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d7ebff"/><stop offset="1" stop-color="#3fa2ff"/></linearGradient>
+  <linearGradient id="gPlein" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4aa8ff"/><stop offset="1" stop-color="#1746c9"/></linearGradient>
+</defs></svg>
+<canvas id="sonar"></canvas>
+<div class="voile"></div>
+
+<div id="intro">
+  <i class="allumage"></i>
+  <div class="version" id="version"></div>
+  <div class="scene">
+    <div class="embZone">
+      <i class="ping"></i><i class="ping p2"></i><i class="ping p3"></i>
+      <i class="orbite"></i><i class="orbite o2"></i><i class="orbite o3"></i>
+      <svg id="embleme" viewBox="0 0 240 240" aria-hidden="true">
+        <polygon class="hexTrait" points="120,14 212,67 212,173 120,226 28,173 28,67"/>
+        <polygon class="hexPlein" points="120,42 188,81 188,159 120,198 52,159 52,81"/>
+        <text class="hex94" x="120" y="149">94</text>
+      </svg>
+    </div>
+    <div class="titre" id="introTitre">BATCAVE OS</div>
+    <div class="sousT"><span>ALFRED EST EN LIGNE</span><i></i></div>
+  </div>
+  <div class="journal" id="journal"></div>
+  <div class="amorce"><span>AMORÇAGE</span><div><i></i></div><b id="pctA">100&nbsp;%</b></div>
+</div>
+
+<div id="tableau">
+  <header>
+    <div class="marque">
+      <svg id="logo" viewBox="0 0 240 240" aria-hidden="true">
+        <polygon class="hexTrait" points="120,14 212,67 212,173 120,226 28,173 28,67"/>
+        <polygon class="hexPlein" points="120,42 188,81 188,159 120,198 52,159 52,81"/>
+        <text class="hex94" x="120" y="149">94</text>
+      </svg>
+      <div><b>BATCAVE OS</b><span>ALFRED · BRIEFING DU JOUR</span></div>
+    </div>
+    <div class="voyants" id="voyants"></div>
+    <div class="quand"><div class="date" id="date"></div><div class="lieu" id="lieu"></div></div>
+  </header>
+
+  <main>
+    <div class="col gauche">
+      <section class="panel" id="meteo" style="--o:0"><h2><i>01</i>MÉTÉO<em id="meteoSrc"></em></h2><div id="meteo_c"></div></section>
+      <section class="panel" id="agendaP" style="--o:3"><h2><i>04</i>AGENDA<em id="nbAg"></em></h2><div id="agenda"></div></section>
+    </div>
+    <div class="col centre">
+      <div id="noyauZone">
+        <div class="repere r1" id="rep1"></div><div class="repere r2" id="rep2"></div>
+        <div class="repere r3" id="rep3"></div><div class="repere r4" id="rep4"></div>
+        <div id="noyau">
+          <canvas id="barres"></canvas>
+          <svg id="cadran" viewBox="-80 0 800 640" aria-hidden="true"></svg>
+          <div class="coeur"><span class="lbl">HEURE LOCALE</span><b id="heure">--:--</b><span class="sec" id="sec"></span></div>
+        </div>
+      </div>
+      <section class="panel" id="prios" style="--o:2"><h2><i>02</i>PRIORITÉS DU JOUR<em id="nbPrio"></em></h2><div class="prios" id="prio"></div></section>
+    </div>
+    <div class="col droite">
+      <section class="panel" id="prieresP" style="--o:1"><h2><i>03</i>PRIÈRES<em id="mosq"></em></h2><div id="prieres"></div></section>
+      <section class="panel" id="lecteurP" style="--o:4"><h2><i>05</i>MUSIQUE DE FOND<em id="nbFond"></em></h2><div id="lecteur"></div></section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="alfred"><div class="orbe"><i></i></div><div><b>ALFRED</b><span id="alfredEtat">EN VEILLE</span></div></div>
+    <div class="sous repos" id="sousTitres"></div>
+    <button id="ecouter" type="button">ÉCOUTER</button>
+  </footer>
+</div>
+<div class="trames"></div>
+<audio id="voix" preload="auto"></audio>
+<audio id="musique" preload="auto"></audio>
+<audio id="fond" preload="auto"></audio>
+
+<script src="https://www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
+<script>
+let D = null;
+const q = new URLSearchParams(location.search);
+const FIGE = null; let JOUER = false;
+// Essais sans aucun son : ?sim=12 fige la voix à 12 s (sous-titres, anneau), ?simfond=40 fige la musique à 40 s (égaliseur).
+const SIM = null, SIMF = null;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const deux = (n) => String(n).padStart(2, "0");
+const enMin = (s) => { const m = /^(\d{1,2})\s*(?::|h)\s*(\d{2})$/.exec(String(s || "").trim()); return m ? +m[1] * 60 + +m[2] : null; };
+const hhmm = (mn) => deux(Math.floor(mn / 60) % 24) + ":" + deux(mn % 60);
+const mmss = (t) => Math.floor(t / 60) + ":" + deux(Math.floor(t % 60));
+const duree = (sec) => { const m = Math.max(1, Math.ceil(sec / 60)), h = Math.floor(m / 60); return h ? h + " h " + deux(m % 60) : m + " min"; };
+const INTRO_MS = 5000, VOIX_MS = 6000, EQN = 26;
+let T0 = performance.now();
+let VM = 0.6, VB = 0.14;
+let FONDS = [];
+let FOND_VOL = 0.5, FOND_BAS = 0.1;
+let DELAI_FOND = 10;
+let assemble = false, fondIdx = 0, fondLance = false;
+
+function maintenant() {
+  if (FIGE === "tableau" && D) { const [j, h] = D.genere.split(" "); return new Date(j + "T" + h + ":00"); }
+  return new Date();
+}
+function niveau(nv, cle, t) {   // niveau sonore mesuré (0-99) à l'instant t
+  if (!nv || t < 0) return 0;
+  const a = nv[cle], x = t / nv.pas, i = Math.floor(x);
+  return i >= a.length - 1 ? 0 : a[i] + (a[i + 1] - a[i]) * (x - i);
+}
+
+/* ================= contenu ================= */
+function icone(type, nuit) {
+  const nuage = (dy) => `<path transform="translate(0 ${dy})" d="M30 66H70a15 15 0 0 0 2-29.8 21 21 0 0 0-40.5-5.2A17.5 17.5 0 0 0 30 66z"/>`;
+  const soleil = (x, y, r) => `<circle cx="${x}" cy="${y}" r="${r}"/><g class="rayons" style="transform-origin:${x}px ${y}px">` + Array.from({ length: 8 }, (_, i) => {
+    const a = i * Math.PI / 4, c = Math.cos(a), s = Math.sin(a);
+    return `<path d="M${(x + c * (r + 7)).toFixed(1)} ${(y + s * (r + 7)).toFixed(1)}L${(x + c * (r + 14)).toFixed(1)} ${(y + s * (r + 14)).toFixed(1)}"/>`; }).join("") + "</g>";
+  const lune = (dx, dy, k) => `<path transform="translate(${dx} ${dy}) scale(${k})" d="M62 22a30 30 0 1 0 16 44A24 24 0 0 1 62 22z"/>`;
+  const gouttes = '<g class="gouttes"><path d="M38 66l-4 11"/><path d="M52 66l-4 11"/><path d="M66 66l-4 11"/></g>';
+  switch (type) {
+    case "eclaircie": return (nuit ? lune(36, -8, .5) : soleil(70, 28, 9)) + nuage(8);
+    case "nuage": return nuage(0);
+    case "brume": return '<g class="brume"><path d="M22 38H78"/><path d="M30 50H86"/><path d="M18 62H70"/><path d="M30 74H80"/></g>';
+    case "pluie": return nuage(-10) + gouttes;
+    case "neige": return nuage(-10) + '<g class="flocons"><circle cx="36" cy="68" r="1.8"/><circle cx="50" cy="72" r="1.8"/><circle cx="64" cy="68" r="1.8"/></g>';
+    case "orage": return nuage(-10) + '<path class="eclair" d="M54 60l-11 15h9l-4 13 14-18h-9l5-10z"/><g class="gouttes"><path d="M32 66l-3 9"/><path d="M73 66l-3 9"/></g>';
+    default: return nuit ? lune(0, 0, 1) : soleil(50, 50, 15);
+  }
+}
+function typeCiel(t) {
+  t = (t || "").toLowerCase();
+  return /orage/.test(t) ? "orage" : /neige/.test(t) ? "neige" : /pluie|averse|bruine/.test(t) ? "pluie" : /brouillard/.test(t) ? "brume" : /couvert/.test(t) ? "nuage" : /nuageux/.test(t) ? "eclaircie" : "clair";
+}
+
+function remplirMeteo(m) {
+  if (!m) { $("meteo_c").innerHTML = '<div class="vide">Service météo injoignable au moment de la préparation.<br>Alfred n\'invente pas de prévision.</div>'; $("meteoSrc").textContent = "hors ligne"; return; }
+  const n = maintenant(), mn = n.getHours() * 60 + n.getMinutes(), nuit = mn < enMin(m.lever) || mn > enMin(m.coucher);
+  const C = 2 * Math.PI * 50, fin = (C * (1 - m.pluie / 100)).toFixed(1);
+  const pos = (m.max > m.min ? Math.max(0, Math.min(1, (m.temp - m.min) / (m.max - m.min))) * 100 : 50).toFixed(1) + "%";
+  $("meteoSrc").textContent = m.source + " · relevé " + m.releve.slice(-5);
+  $("meteo_c").innerHTML = `
+    <div class="mHaut st" style="--i:0">
+      <div class="icone"><svg viewBox="0 0 100 100">${icone(typeCiel(m.ciel), nuit)}</svg></div>
+      <div><div class="temp"><span id="tNum" data-v="${m.temp}">${m.temp}</span><sup>°C</sup></div><div class="ciel">${esc(m.ciel)}</div><div class="cielJ">Aujourd'hui : ${esc(m.ciel_jour)}</div></div>
+      <div class="jauge"><svg viewBox="0 0 120 120"><circle class="jf" cx="60" cy="60" r="50"/><circle class="jv" id="anneauPluie" cx="60" cy="60" r="50" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${fin}" data-c="${C.toFixed(1)}" data-fin="${fin}"/></svg>
+        <div class="jt"><b><span id="pNum" data-v="${m.pluie}">${m.pluie}</span>%</b><span>pluie</span></div></div>
+    </div>
+    <div class="plage st" style="--i:1"><div class="lgd"><span>min</span><span>température du jour</span><span>max</span></div>
+      <div class="rail"><i id="curseurT" style="left:${pos}" data-fin="${pos}"></i></div>
+      <div class="bornes"><span>${m.min}°</span><span>${m.max}°</span></div></div>
+    <div class="duo st" style="--i:2"><div><b>${m.ressenti}°</b><span class="k">ressenti</span></div><div><b>${m.vent} km/h</b><span class="k">vent</span></div></div>`;
+}
+
+function remplirPriorites() {
+  const L = D.priorites || [];
+  $("nbPrio").textContent = L.length + " / 5";
+  $("prio").className = "prios" + (L.length <= 2 ? " seul" : "");
+  $("prio").innerHTML = L.length ? L.map((p, i) => `<div class="pr st" style="--i:${i}"><b>${deux(i + 1)}</b><span>${esc(p)}</span></div>`).join("")
+                                 : '<div class="vide">Aucune priorité dans priorites.md.</div>';
+}
+
+function remplirPrieres(P) {
+  if (!P) { $("prieres").innerHTML = '<div class="vide">Horaires indisponibles (mosquée injoignable et pas de cache).</div>'; $("mosq").textContent = "hors ligne"; return; }
+  $("mosq").textContent = P.jumua && P.jumua.length ? "Jumu'a " + P.jumua.join(" · ") : "Choisy-le-Roi";
+  $("prieres").innerHTML = P.prieres.map((p, i) => {
+    const lever = p.nom === "Shuruq";
+    return `<div class="pLigne st${lever ? " lever" : ""}" style="--i:${i}" data-nom="${esc(p.nom)}" data-t="${enMin(p.adhan)}"><span class="pn">${lever ? "Lever du soleil" : esc(p.nom)}</span>
+      <span class="ph"><b>${p.adhan}</b><small>${lever ? "&nbsp;" : "adhan"}</small></span><span class="ph">${p.iqama ? `<b>${p.iqama}</b><small>iqama</small>` : ""}</span></div>`; }).join("") +
+    `<div class="compte st" style="--i:6"><div class="cH"><span class="k">prochaine prière</span><b id="pNom"></b></div><div class="cT" id="pDans"></div>
+      <div class="rail2"><i id="pProg"></i></div><div class="cB"><span id="pDe"></span><span id="pA"></span></div></div>`;
+}
+
+function remplirAgenda() {
+  const A = D.agenda;
+  if (A === null) { $("agenda").innerHTML = '<div class="vide">Ni agenda Google connecté, ni semaine type renseignée.<br>Remplis emploi_du_temps.json ou ajoute « agenda_ics » dans config.json.</div>'; $("nbAg").textContent = "hors ligne"; return; }
+  if (!A.length) { $("agenda").innerHTML = '<div class="vide">Rien de prévu aujourd\'hui.</div>'; $("nbAg").textContent = "journée libre"; return; }
+  $("nbAg").textContent = A.length + " créneau" + (A.length > 1 ? "x" : "");
+  const MAX = 4;
+  $("agenda").innerHTML = A.slice(0, MAX).map((e, i) => {
+    const d = enMin(e.heure), f = enMin(e.fin);
+    const titre = f != null ? e.titre.replace(/\s*\(\s*\d{1,2}\s*h\s*\d{0,2}\s*[-–]\s*\d{1,2}\s*h\s*\d{0,2}\s*\)\s*$/i, "") : e.titre;
+    return `<div class="ev st" style="--i:${i}"${d != null ? ` data-d="${d}"` : ""}${f != null ? ` data-f="${f}"` : ""}><div class="eh">${d != null ? hhmm(d) : esc(e.heure)}${f != null ? `<small>→ ${hhmm(f)}</small>` : ""}</div><div class="et">${esc(titre)}</div><span class="es"></span></div>`;
+  }).join("") + (A.length > MAX ? `<div class="k" style="padding-left:.7vw">+ ${A.length - MAX} autre${A.length - MAX > 1 ? "s" : ""}</div>` : "");
+}
+
+const decoupeTitre = (t) => { const m = /^(.*?)\s+[-–—]\s+(.*)$/.exec(t); return m ? [m[2], m[1]] : [t, ""]; };
+function remplirLecteur() {
+  $("nbFond").textContent = FONDS.length ? FONDS.length + " titre" + (FONDS.length > 1 ? "s" : "") : "aucun titre";
+  if (!FONDS.length) { $("lecteur").innerHTML = '<div class="vide">Aucun morceau. Dépose tes MP3, et leur pochette du même nom, dans le dossier musique_fond.</div>'; return; }
+  $("lecteur").innerHTML = `<div class="lecteur" id="lecteurZone"><div class="cadreP" id="cadreP"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="12"/><path d="M50 10a40 40 0 0 1 40 40"/></svg><img id="pochette" alt="" hidden></div>
+    <div class="pInfos"><span class="k" id="fondEtat"></span><div class="tt" id="fondTitre"></div><span class="ar" id="fondArtiste"></span>
+      <div class="eq" id="eq">${"<i></i>".repeat(EQN)}</div><div class="rail3"><i id="fondProg"></i></div><div class="tps"><span id="fondT">0:00</span><span id="fondD">–:––</span></div></div></div>
+    <div class="suite" id="fondSuite"></div>`;
+  afficherPiste(0);
+  $("lecteurZone").addEventListener("click", () => { const f = $("fond"); if (!fondLance) jouerFond(0); else if (f.paused) f.play().catch(() => {}); else f.pause(); });
+}
+function afficherPiste(i) {
+  if (!FONDS.length) return;
+  const p = FONDS[i], [titre, artiste] = decoupeTitre(p.titre), img = $("pochette");
+  $("fondTitre").textContent = titre; $("fondArtiste").textContent = artiste;
+  if (p.pochette) { img.src = p.pochette; img.hidden = false; } else { img.removeAttribute("src"); img.hidden = true; }
+  $("fondSuite").textContent = FONDS.length > 1 ? "À suivre : " + decoupeTitre(FONDS[(i + 1) % FONDS.length].titre)[0] : "Ce titre tourne en boucle";
+  $("fondD").textContent = p.niveaux ? mmss(p.niveaux.pas * p.niveaux.n.length) : "–:––";
+}
+
+/* --- cadran du jour : 24 h, midi en haut, minuit en bas --- */
+const pol = (r, mn) => { const a = (mn / 1440 * 360 + 180) * Math.PI / 180; return [+(320 + r * Math.sin(a)).toFixed(1), +(320 - r * Math.cos(a)).toFixed(1)]; };
+const arc = (r, m1, m2) => { const p1 = pol(r, m1), p2 = pol(r, m2); return `M${p1} A${r} ${r} 0 ${((m2 - m1 + 1440) % 1440) > 720 ? 1 : 0} 1 ${p2}`; };
+function construireCadran() {
+  const m = D.meteo, P = D.prieres;
+  let s = `<defs><linearGradient id="gJour" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2f7bff"/><stop offset=".5" stop-color="#eef5ff"/><stop offset="1" stop-color="#2f7bff"/></linearGradient>
+    <filter id="lueur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter></defs><circle class="orb" cx="320" cy="320" r="272"/>`;
+  let g = "", g6 = "";
+  for (let i = 0; i < 96; i++) { const mn = i * 15, six = mn % 360 === 0, t = `M${pol(six ? 253 : mn % 60 === 0 ? 259 : 265, mn)}L${pol(272, mn)}`; if (six) g6 += t; else g += t; }
+  s += `<path class="grad" d="${g}"/><path class="grad6" d="${g6}"/>`;
+  for (let h = 0; h < 24; h += 3) { const [x, y] = pol(243, h * 60); s += `<text class="hh${h % 6 ? "" : " fort"}" x="${x}" y="${y}">${deux(h)}</text>`; }
+  if (m) { const a = arc(268, enMin(m.lever), enMin(m.coucher)); s += `<path class="jourLueur" d="${a}"/><path class="jour" d="${a}"/>`; }
+  (D.agenda || []).forEach((e) => { const d = enMin(e.heure), f = enMin(e.fin); if (d == null) return;
+    s += f != null && f > d ? `<path class="creneau" data-d="${d}" data-f="${f}" d="${arc(229, d, f)}"/>` : `<path class="creneau court" data-d="${d}" d="M${pol(222, d)}L${pol(236, d)}"/>`; });
+  if (P) P.prieres.forEach((p) => { if (p.nom === "Shuruq") return;
+    const mn = enMin(p.adhan), a = pol(256, mn), b = pol(281, mn), c = pol(268, mn), t = pol(299, mn);
+    s += `<g class="pr" data-nom="${esc(p.nom)}" data-t="${mn}"><line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}"/><circle class="pt" cx="${c[0]}" cy="${c[1]}" r="4.5"/>
+      <text x="${t[0]}" y="${t[1]}" text-anchor="${t[0] > 345 ? "start" : t[0] < 295 ? "end" : "middle"}">${esc(p.nom.toUpperCase())}</text></g>`; });
+  s += `<g class="tourne"><circle class="pointille" cx="320" cy="320" r="213"/></g><g class="tourne inverse"><circle class="arcs3" cx="320" cy="320" r="141"/></g>
+    <circle class="fin" cx="320" cy="320" r="152"/><circle class="sec60" cx="320" cy="320" r="158"/>
+    <circle class="arcSec" id="arcSec" cx="320" cy="320" r="152" transform="rotate(-90 320 320)" stroke-dashoffset="955.04"/>
+    <g id="aiguille"><line x1="320" y1="106" x2="320" y2="34"/><path d="M320 26l-5.5 -10h11z"/><circle cx="320" cy="52" r="4"/></g>`;
+  $("cadran").innerHTML = s;
+  if (m) {
+    const j = enMin(m.coucher) - enMin(m.lever);
+    $("rep1").innerHTML = `<span>lever du soleil</span><b>${m.lever}</b><small>arc clair = jour</small>`;
+    $("rep3").innerHTML = `<span>coucher du soleil</span><b>${m.coucher}</b><small>jour de ${Math.floor(j / 60)} h ${deux(j % 60)}</small>`;
+  } else { $("rep1").style.display = $("rep3").style.display = "none"; }
+}
+
+function remplirIntro(m, P, nbP, secours) {
+  const A = D.agenda, L = [
+    ["NOYAU BATCAVE OS", "ACTIF", true],
+    ["MÉTÉO · OPEN-METEO", m ? m.temp + " °C · " + m.ciel.toUpperCase() : "INJOIGNABLE", !!m],
+    ["MOSQUÉE · MAWAQIT", P ? "HORAIRES DU JOUR REÇUS" : "INDISPONIBLE", !!P],
+    ["AGENDA", A === null ? "NON CONNECTÉ" : A.length ? A.length + " CRÉNEAU" + (A.length > 1 ? "X" : "") : "JOURNÉE LIBRE", A !== null],
+    ["PRIORITÉS", nbP ? nbP + " CHARGÉE" + (nbP > 1 ? "S" : "") : "AUCUNE", nbP > 0],
+    ["VOIX D'ALFRED", secours ? "VOIX DE SECOURS" : "PRÊTE · " + Math.round(D.duree_voix || 0) + " S", !secours],
+    ["MUSIQUE DE FOND", FONDS.length ? FONDS.length + " TITRE" + (FONDS.length > 1 ? "S" : "") : "AUCUN TITRE", FONDS.length > 0]];
+  $("journal").innerHTML = L.map((l, i) => `<div class="lg" style="--i:${i}"><span>${esc(l[0])}</span><i></i><b class="${l[2] ? "" : "ko"}">${esc(l[1])}</b></div>`).join("");
+  $("version").innerHTML = `<span>Batcave OS · Agent 94</span><span>${esc(D.date)} · ${esc(D.genere.split(" ")[1])}</span>`;
+}
+
+function remplir() {
+  if (!D) { $("sousTitres").textContent = "Aucune donnée : lance d'abord alfred.py."; return; }
+  const m = D.meteo, P = D.prieres, secours = /hors ligne/i.test(D.voix || ""), nbP = D.priorites ? D.priorites.length : 0;
+  $("date").textContent = D.date;
+  $("lieu").textContent = (m ? m.ville + " · " : "") + "briefing généré à " + D.genere.split(" ")[1];
+  $("voyants").innerHTML = [["MÉTÉO", m ? "" : "ko"], ["MOSQUÉE", P ? "" : "ko"], ["AGENDA", D.agenda === null ? "mi" : ""], ["VOIX", secours ? "mi" : ""], ["MUSIQUE", FONDS.length ? "" : "mi"]]
+    .map((v) => `<span class="${v[1]}"><i></i>${v[0]}</span>`).join("");
+  remplirMeteo(m); remplirPriorites(); remplirPrieres(P); remplirAgenda(); remplirLecteur(); construireCadran(); remplirIntro(m, P, nbP, secours);
+  $("voix").src = D.audio; if (D.musique) $("musique").src = D.musique;
+}
+
+/* ================= temps réel : horloge, aiguille, prières, agenda ================= */
+function etatPrieres(mn, s) {
+  const L = D.prieres.prieres.filter((p) => p.nom !== "Shuruq").map((p) => ({ nom: p.nom, adhan: p.adhan, t: enMin(p.adhan) }));
+  let suiv = L.find((p) => p.t > mn), prec = [...L].reverse().find((p) => p.t <= mn), demain = false, tS, tP;
+  if (suiv) tS = suiv.t; else { demain = true; const d = (D.prochaine && D.prochaine.demain) ? D.prochaine : L[0]; suiv = { nom: d.nom, adhan: d.adhan, t: enMin(d.adhan) }; tS = suiv.t + 1440; }
+  if (prec) tP = prec.t; else { prec = L[L.length - 1]; tP = prec.t - 1440; }
+  return { suiv, prec, demain, resteS: (tS - mn) * 60 - s, prog: Math.max(0, Math.min(1, (mn + s / 60 - tP) / (tS - tP))) };
+}
+function tic() {
+  if (!D) return;
+  const n = maintenant(), mn = n.getHours() * 60 + n.getMinutes(), s = FIGE ? 0 : n.getSeconds();
+  $("heure").textContent = deux(n.getHours()) + ":" + deux(n.getMinutes());
+  $("sec").textContent = FIGE ? "" : deux(s);
+  $("aiguille").style.transform = `rotate(${((mn + s / 60) / 1440 * 360 + 180).toFixed(2)}deg)`;
+  $("arcSec").setAttribute("stroke-dashoffset", (955.04 * (1 - s / 60)).toFixed(1));
+  if (D.prieres) {
+    const e = etatPrieres(mn, s);
+    document.querySelectorAll("#prieres .pLigne").forEach((el) => { el.classList.toggle("passe", !e.demain && +el.dataset.t <= mn); el.classList.toggle("suiv", !e.demain && el.dataset.nom === e.suiv.nom); });
+    document.querySelectorAll("#cadran .pr").forEach((el) => { el.classList.toggle("passe", !e.demain && +el.dataset.t <= mn); el.classList.toggle("suiv", el.dataset.nom === e.suiv.nom); });
+    $("pNom").textContent = e.suiv.nom.toUpperCase() + " · " + e.suiv.adhan;
+    $("pDans").textContent = "dans " + duree(e.resteS) + (e.demain ? " (demain)" : "");
+    $("pProg").style.width = (e.prog * 100).toFixed(1) + "%";
+    $("pDe").textContent = e.prec.nom + " " + e.prec.adhan; $("pA").textContent = e.suiv.nom + " " + e.suiv.adhan;
+    $("rep2").innerHTML = `<span>prochaine prière</span><b>${esc(e.suiv.nom)} ${e.suiv.adhan}</b><small>dans ${duree(e.resteS)}</small>`;
+  } else $("rep2").style.display = "none";
+  // agenda : terminé / en cours / prochain
+  let vu = false, cours = null, proch = null;
+  document.querySelectorAll("#agenda .ev").forEach((el) => {
+    const d = el.dataset.d != null ? +el.dataset.d : null, f = el.dataset.f != null ? +el.dataset.f : null, es = el.querySelector(".es");
+    let etat = "", cls = "";
+    if (d != null) {
+      if (mn < d) { etat = vu ? "À VENIR" : "PROCHAIN"; cls = vu ? "" : "suiv"; if (!vu) proch = { el, d }; vu = true; }
+      else if (f != null && mn < f) { etat = "EN COURS"; cls = "cours"; cours = { el, f }; }
+      else if (f != null) { etat = "TERMINÉ"; cls = "passe"; }
+      else etat = "COMMENCÉ";
+    }
+    el.classList.remove("suiv", "cours", "passe"); if (cls) el.classList.add(cls);
+    es.textContent = etat; es.style.display = etat ? "" : "none";
+  });
+  document.querySelectorAll("#cadran .creneau").forEach((el) => { const d = +el.dataset.d, f = el.dataset.f != null ? +el.dataset.f : null;
+    el.classList.toggle("cours", f != null && mn >= d && mn < f); el.classList.toggle("passe", f != null ? mn >= f : mn >= d); });
+  const A = D.agenda, titreDe = (x) => x.el.querySelector(".et").textContent;
+  $("rep4").innerHTML = A === null ? "<span>agenda</span><b>Non connecté</b>"
+    : cours ? `<span>en cours</span><b>${esc(titreDe(cours))}</b><small>jusqu'à ${hhmm(cours.f)}</small>`
+    : proch ? `<span>prochain créneau</span><b>${esc(titreDe(proch))}</b><small>à ${hhmm(proch.d)} · dans ${duree((proch.d - mn) * 60 - s)}</small>`
+    : A.length ? `<span>agenda</span><b>Journée terminée</b><small>${A.length} créneau${A.length > 1 ? "x" : ""} aujourd'hui</small>`
+    : "<span>agenda</span><b>Journée libre</b>";
+}
+
+/* ================= décor : grille hexagonale et ondes d'écholocation ================= */
+const cv = $("sonar"), g2 = cv.getContext("2d");
+let W = 0, H = 0, DPR = 1, HEXR = 30, hexes = [], grille = null, ondes = [], grains = [];
+function hexa(g, x, y, r) { g.beginPath(); for (let i = 0; i < 6; i++) { const a = Math.PI / 3 * i + Math.PI / 6, px = x + r * Math.cos(a), py = y + r * Math.sin(a); if (i) g.lineTo(px, py); else g.moveTo(px, py); } g.closePath(); }
+function tailler() {
+  DPR = Math.min(window.devicePixelRatio || 1, 2); W = cv.width = Math.round(innerWidth * DPR); H = cv.height = Math.round(innerHeight * DPR);
+  HEXR = H * 0.033; hexes = []; const dx = HEXR * Math.sqrt(3), dy = HEXR * 1.5;
+  for (let l = 0, y = 0; y < H + HEXR; l++, y += dy) for (let x = (l & 1 ? dx / 2 : 0); x < W + dx; x += dx) hexes.push([x, y]);
+  grille = document.createElement("canvas"); grille.width = W; grille.height = H;
+  const g = grille.getContext("2d"); g.strokeStyle = "rgba(72,140,255,.065)"; g.lineWidth = DPR;
+  for (const [x, y] of hexes) { hexa(g, x, y, HEXR - 2 * DPR); g.stroke(); }
+  grains = Array.from({ length: 44 }, () => ({ x: Math.random() * W, y: Math.random() * H, v: (4 + Math.random() * 10) * DPR, r: (0.6 + Math.random() * 1.4) * DPR, p: Math.random() * 6.28 }));
+  const b = $("barres"); b.width = b.height = Math.max(2, Math.round($("noyau").getBoundingClientRect().height * DPR));
+}
+function centre() { const r = (assemble ? $("noyau") : $("embleme")).getBoundingClientRect(); return [(r.left + r.width / 2) * DPR, (r.top + r.height / 2) * DPR]; }
+function onde(o) { o = o || {}; const [x, y] = centre(); ondes.push({ x, y, r: (o.r0 || 0.06) * H, v: (o.v || 0.26) * H, max: (o.max || 1.1) * H, a: o.a || 0.5, c: o.c || "63,162,255" }); }
+function decor(dt) {
+  g2.clearRect(0, 0, W, H); g2.drawImage(grille, 0, 0); g2.lineWidth = DPR;
+  const bande = HEXR * 1.7;
+  for (const o of ondes) {
+    o.r += o.v * dt; const k = Math.max(0, 1 - o.r / o.max), f = k * o.a;
+    for (const [x, y] of hexes) { const d = Math.abs(Math.hypot(x - o.x, y - o.y) - o.r); if (d < bande) { const e = (1 - d / bande) * f; hexa(g2, x, y, HEXR - 2 * DPR); g2.fillStyle = `rgba(${o.c},${(e * .17).toFixed(3)})`; g2.fill(); g2.strokeStyle = `rgba(${o.c},${(e * .8).toFixed(3)})`; g2.stroke(); } }
+    g2.beginPath(); g2.arc(o.x, o.y, o.r, 0, 6.2832); g2.strokeStyle = `rgba(${o.c},${(f * .5).toFixed(3)})`; g2.lineWidth = (1 + 1.5 * k) * DPR; g2.stroke(); g2.lineWidth = DPR;
+  }
+  ondes = ondes.filter((o) => o.r < o.max);
+  for (const p of grains) { p.y -= p.v * dt; p.p += dt; if (p.y < -5) { p.y = H + 5; p.x = Math.random() * W; } g2.beginPath(); g2.arc(p.x, p.y, p.r, 0, 6.2832); g2.fillStyle = `rgba(168,211,255,${(0.10 + 0.22 * (0.5 + 0.5 * Math.sin(p.p * 1.3))).toFixed(3)})`; g2.fill(); }
+}
+
+/* --- anneau de voix : les barres suivent le niveau réel de la voix d'Alfred --- */
+const voixEnCours = () => { const a = $("voix"); return !a.paused && !a.ended; };
+const tempsVoix = () => SIM !== null ? SIM : (voixEnCours() ? $("voix").currentTime : null);
+function barres(ts) {
+  const c = $("barres"), g = c.getContext("2d"), S = c.width, u = S / 640, tv = tempsVoix(), N = 132;
+  g.clearRect(0, 0, S, S); g.save(); g.translate(S / 2, S / 2);
+  for (let k = 0; k < N; k++) {
+    const j = Math.min(k, N - k); let L;
+    if (tv !== null) { const n = D.niveaux_voix ? niveau(D.niveaux_voix, "n", tv - j * 0.013) : 30 + 25 * Math.sin(ts / 130 + k * 0.7);
+      L = 4 + n * 0.40; g.fillStyle = `rgba(${Math.round(120 + n * 1.35)},${Math.round(190 + n * 0.6)},255,${(0.45 + n / 180).toFixed(2)})`; }
+    else { L = 5 + 3 * Math.sin(ts / 900 + k * 0.38) * Math.sin(ts / 2300 + k * 0.11); g.fillStyle = "rgba(63,162,255,.38)"; }
+    g.fillRect(-1.25 * u, -(162 + L) * u, 2.5 * u, L * u); g.rotate(6.2832 / N);
+  }
+  g.restore();
+}
+
+/* --- lecteur : égaliseur, progression, ondes sur les basses --- */
+let eqBars = null, coup = 0;
+function lecteurVif(ts) {
+  if (!FONDS.length) return;
+  const f = $("fond"), nv = FONDS[fondIdx].niveaux, joue = SIMF !== null || (fondLance && !f.paused);
+  let e = fondLance ? (f.paused ? "EN PAUSE" : "LECTURE") : "PRÊT À JOUER";
+  if (!fondLance && JOUER) { const r = Math.ceil(DELAI_FOND - (performance.now() - T0) / 1000); e = r > 0 ? "DÉMARRE DANS " + r + " S" : "DÉMARRAGE…"; }
+  if (SIMF !== null) e = "LECTURE";
+  if ($("fondEtat").textContent !== e) $("fondEtat").textContent = e;
+  eqBars = eqBars || [...$("eq").children];
+  if (!joue) { for (const b of eqBars) b.style.transform = "scaleY(.06)"; $("cadreP").style.transform = ""; return; }
+  const t = SIMF !== null ? SIMF : f.currentTime, total = SIMF !== null && nv ? nv.pas * nv.n.length : f.duration;
+  for (let i = 0; i < EQN; i++) {
+    const x = i / (EQN - 1), v = nv ? ((1 - x) * niveau(nv, "b", t - i * 0.006) + x * niveau(nv, "n", t - i * 0.02)) * (0.55 + 0.45 * Math.abs(Math.sin(i * 12.9898))) : 35 + 30 * Math.sin(ts / 160 + i * 1.7);
+    eqBars[i].style.transform = `scaleY(${(0.06 + v / 105).toFixed(3)})`;
+  }
+  if (nv) {
+    const b = niveau(nv, "b", t), b0 = niveau(nv, "b", t - 0.1);
+    $("cadreP").style.transform = `scale(${(1 + b / 99 * 0.03).toFixed(4)})`;
+    if (assemble && b > 62 && b - b0 > 24 && ts - coup > 320) { coup = ts; onde({ r0: 0.215, v: 0.85, max: 0.82, a: 0.42 * Math.min(1, 0.3 + f.volume / (FOND_VOL || 1)), c: "168,211,255" }); }
+  }
+  if (total) { $("fondProg").style.width = (100 * t / total).toFixed(2) + "%"; $("fondT").textContent = mmss(t); $("fondD").textContent = mmss(total); }
+}
+
+/* --- sous-titres synchronisés mot à mot --- */
+let CUES = null, cueIdx = -1;
+function preparerSousTitres() {
+  let J = D.mots;
+  if (!J) {   // pas de repères (voix de secours) : mots répartis au prorata de leur longueur
+    const mots = D.texte.split(/\s+/).filter(Boolean), total = mots.join(" ").length, d = D.duree_voix || $("voix").duration || 60; let c = 0;
+    J = mots.map((w) => { const t = d * c / total; c += w.length + 1; return [t, w]; });
+  }
+  CUES = []; let cur = [], len = 0;
+  for (const j of J) { cur.push(j); len += j[1].length + 1;
+    if (/[.!?…]$/.test(j[1]) || (/[;:]$/.test(j[1]) && len > 38) || (/,$/.test(j[1]) && len > 70) || len > 96) { CUES.push(cur); cur = []; len = 0; } }
+  if (cur.length) CUES.push(cur);
+}
+function majSousTitres(t) {
+  if (!CUES) preparerSousTitres();
+  let i = CUES.findIndex((c, k) => k + 1 >= CUES.length || t < CUES[k + 1][0][0]);
+  const z = $("sousTitres");
+  if (i !== cueIdx) { cueIdx = i; z.className = "sous"; z.innerHTML = '<div class="cue">' + CUES[i].map((j) => `<span class="w">${esc(j[1])}</span>`).join(" ") + "</div>"; }
+  let vif = -1; CUES[i].forEach((j, k) => { if (t >= j[0]) vif = k; });
+  z.querySelectorAll(".w").forEach((w, k) => { w.classList.toggle("dit", k <= vif); w.classList.toggle("vif", k === vif); });
+}
+function repos(txt) { const z = $("sousTitres"); cueIdx = -1; z.className = "sous repos"; z.textContent = txt; }
+
+/* ================= son (même logique qu'avant, plus un fondu entre le thème et ta musique) ================= */
+let rampeId = null;
+function rampe(vers, ms, fin) {
+  const m = $("musique"), de = m.volume, t0 = performance.now();
+  clearInterval(rampeId);
+  rampeId = setInterval(() => { const u = Math.min((performance.now() - t0) / ms, 1); m.volume = Math.max(0, Math.min(1, de + (vers - de) * u)); if (u >= 1) { clearInterval(rampeId); if (fin) fin(); } }, 40);
+}
+function musique(volume) {
+  const m = $("musique");
+  if (!D || !D.musique) return;
+  if (m.paused) { m.currentTime = 0; m.volume = volume; m.play().then(() => { document.body.dataset.musique = "oui"; journal("musique ok"); }).catch((err) => journal("musique refusée: " + err.name + " " + err.message)); }
+  else rampe(volume, 900);
+}
+function finMusique() { rampe(VM, 1500, () => setTimeout(() => rampe(0, 6000, () => $("musique").pause()), 9000)); }
+let fondRampeId = null;
+function fondRampe(vers, ms) {
+  const a = $("fond"), de = a.volume, t0 = performance.now();
+  clearInterval(fondRampeId);
+  fondRampeId = setInterval(() => { const u = Math.min((performance.now() - t0) / ms, 1); a.volume = Math.max(0, Math.min(1, de + (vers - de) * u)); if (u >= 1) clearInterval(fondRampeId); }, 40);
+}
+function jouerFond(i) {
+  if (!FONDS.length) return;
+  const premier = !fondLance; fondIdx = (i + FONDS.length) % FONDS.length; fondLance = true;
+  const p = FONDS[fondIdx], a = $("fond");
+  clearInterval(fondRampeId);
+  a.src = p.audio; a.volume = voixEnCours() ? FOND_BAS : FOND_VOL;   // sous la voix : la musique arrive déjà baissée
+  a.play().catch(() => {});
+  afficherPiste(fondIdx);
+  a.onended = () => jouerFond(fondIdx + 1);
+  if (premier && !$("musique").paused) rampe(0, 2600, () => $("musique").pause());   // ta musique prend le relais du thème d'Alfred
+}
+// La voix ne démarre qu'une fois le fichier audio entièrement chargé (pas pendant son chargement).
+function pretVoix(cb) {
+  const a = $("voix");
+  if (a.readyState >= 4) return cb();
+  a.addEventListener("canplaythrough", () => cb(), { once: true });
+  a.load();
+}
+function parler() {
+  const a = $("voix");
+  a.currentTime = 0;
+  if (!fondLance) { if ($("musique").paused) musique(VB); else rampe(VB, 1100); }
+  if (fondLance) fondRampe(FOND_BAS, 1100);
+  a.play().then(() => {
+    journal("voix ok");
+    document.body.classList.add("parle"); $("alfredEtat").textContent = "PARLE"; cueIdx = -1;
+    document.title = "Batcave OS — Alfred (voix en cours" + (document.body.dataset.musique ? " + musique)" : ")");
+  }).catch((err) => { journal("voix refusée: " + err.name); $("ecouter").textContent = "CLIQUER POUR ÉCOUTER"; document.title = "Batcave OS — Alfred (cliquer pour écouter)"; });
+  a.onended = () => {
+    document.body.classList.remove("parle"); $("alfredEtat").textContent = "BRIEFING TERMINÉ"; document.title = "Batcave OS — Alfred";
+    if (fondLance) fondRampe(FOND_VOL, 1800); else finMusique();
+    repos("« " + D.devise + " »");
+  };
+}
+
+/* ================= cinématique ================= */
+function introVive() {
+  const el = $("introTitre"), fin = "BATCAVE OS", G = "ABCDEFGHKLMNPRSTVXZ0123456789", t0 = performance.now() + 1500;
+  (function pas() {
+    const u = (performance.now() - t0) / 1100;
+    if (u >= 1) { el.textContent = fin; return; }
+    if (u < 0) el.textContent = " ";
+    else { const n = Math.floor(u * fin.length); el.textContent = fin.slice(0, n) + [...fin.slice(n)].map((c) => c === " " ? " " : G[Math.floor(Math.random() * G.length)]).join(""); }
+    requestAnimationFrame(pas);
+  })();
+  (function pct() { const u = Math.min(1, (performance.now() - T0 - 350) / 4300), e = u < 0 ? 0 : 1 - Math.pow(1 - u, 1.6); $("pctA").textContent = Math.round(e * 100) + " %"; if (u < 1) requestAnimationFrame(pct); })();
+  [700, 2300, 3900].forEach((t) => setTimeout(() => onde({ a: .6 }), t));
+}
+function compter(el, ms) {
+  if (!el) return; const v = +el.dataset.v, t0 = performance.now(); el.textContent = "0";
+  (function pas() { const u = Math.min(1, (performance.now() - t0) / ms); el.textContent = Math.round(v * (1 - Math.pow(1 - u, 3))); if (u < 1) requestAnimationFrame(pas); })();
+}
+function assembler() {
+  const intro = $("intro"), emb = $("embleme"), logo = $("logo");
+  const a = emb.getBoundingClientRect(), b = logo.getBoundingClientRect();   // mesuré avant que l'en-tête ne s'anime
+  // jauges remises à zéro puis lancées : elles se remplissent pendant que les panneaux se déploient
+  const an = $("anneauPluie"), cu = $("curseurT"), pp = $("pProg");
+  [an, cu, pp].forEach((e) => { if (e) e.style.transition = "none"; });
+  if (an) an.setAttribute("stroke-dashoffset", an.dataset.c); if (cu) cu.style.left = "0%"; const largeur = pp ? pp.style.width : ""; if (pp) pp.style.width = "0";
+  void document.body.offsetWidth;
+  [an, cu, pp].forEach((e) => { if (e) e.style.transition = ""; });
+  assemble = true; $("tableau").classList.add("visible"); intro.classList.add("fin");
+  logo.style.opacity = 0; emb.style.transformOrigin = "0 0"; emb.style.transition = "transform .95s cubic-bezier(.65,0,.2,1)";
+  emb.style.transform = `translate(${(b.left - a.left).toFixed(1)}px, ${(b.top - a.top).toFixed(1)}px) scale(${(b.width / a.width).toFixed(4)})`;
+  setTimeout(() => { logo.style.opacity = 1; intro.style.display = "none"; }, 1000);
+  setTimeout(() => { if (an) an.setAttribute("stroke-dashoffset", an.dataset.fin); if (cu) cu.style.left = cu.dataset.fin; if (pp) pp.style.width = largeur; compter($("tNum"), 1500); compter($("pNum"), 1700); }, 450);
+  onde({ r0: 0.215, a: .7 }); setTimeout(() => onde({ r0: 0.215, a: .5 }), 900);
+}
+let dernier = 0;
+function boucle(ts) {
+  const dt = Math.min(0.05, (ts - dernier) / 1000 || 0); dernier = ts;
+  decor(dt); barres(ts); lecteurVif(ts);
+  const tv = tempsVoix(); if (tv !== null) majSousTitres(tv);
+  requestAnimationFrame(boucle);
+}
+
+function demarrer(p) {
+  D = p; JOUER = true; journal("reçu, démarrage");
+  VM = D.musique_volume != null ? D.musique_volume : 0.6; VB = D.musique_bas != null ? D.musique_bas : 0.14;
+  FONDS = D.fond || []; FOND_VOL = D.fond_volume != null ? D.fond_volume : 0.5; FOND_BAS = D.fond_bas != null ? D.fond_bas : 0.1;
+  DELAI_FOND = D.fond_delai != null ? D.fond_delai : 10;
+  tailler(); remplir();
+  document.body.classList.add("anim");
+  T0 = performance.now();
+  introVive(); setInterval(tic, 1000);
+  setTimeout(assembler, INTRO_MS);
+  requestAnimationFrame(boucle);
+  addEventListener("resize", tailler);
+  if (D.musique) musique(VM);
+  setTimeout(() => pretVoix(parler), INTRO_MS + 200);
+  if (FONDS.length) setTimeout(() => { if (!fondLance) jouerFond(0); }, DELAI_FOND * 1000);
+}
+$("ecouter").style.display = "none";
+const CAST_NS = "urn:x-cast:com.batcave.alfred";
+function journal(e) { try { cast.framework.CastReceiverContext.getInstance().sendCustomMessage(CAST_NS, undefined, { e: e, t: Math.round(performance.now()) }); } catch (x) {} }
+const contexte = cast.framework.CastReceiverContext.getInstance();
+contexte.addCustomMessageListener(CAST_NS, (ev) => { if (!D && ev.data) demarrer(ev.data); });
+contexte.start();
+</script>
+</body>
+</html>
+
     --trait:rgba(72,140,255,.26); --trait2:rgba(72,140,255,.11);
     --hud:"Bahnschrift","Segoe UI",Arial,sans-serif; --mono:"Cascadia Mono","Consolas","Lucida Console",monospace;
   }
