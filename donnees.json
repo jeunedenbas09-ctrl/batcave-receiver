@@ -189,15 +189,5 @@
   "journee": "Senior Journée 3",
   "source": "FFF - epreuves.fff.fr (calendrier)",
   "affiche": "dim 15 nov · 15h00"
- },
- "corps": {
-  "poids_kg": 75.8,
-  "masse_grasse_pct": 13.1
- },
- "agenda": [
-  {
-   "heure": "journée",
-   "titre": "Taff"
-  }
- ]
+ }
 }
