@@ -1,7 +1,7 @@
 """Mise à jour Batcave dans le cloud (GitHub Actions) : produit donnees.json et briefing.mp3 pour la TV.
 Ne contient aucun secret. Le classement vient de classement_manuel.json (la FFF bloque les serveurs).
 Le texte du briefing reprend la logique d'alfred.py (heure, météo, agenda de la semaine, prochaine prière)."""
-import asyncio, datetime as dt, json, re, urllib.parse, urllib.request
+import asyncio, datetime as dt, json, os, re, urllib.parse, urllib.request
 from pathlib import Path
 
 PARIS = dt.timezone(dt.timedelta(hours=1))
@@ -75,6 +75,41 @@ def match():
     m = json.loads((ICI / "match_foot.json").read_text(encoding="utf-8"))
     return m
 
+def poids_withings():
+    """Poids et masse grasse via Withings. Identifiants lus dans les secrets GitHub (jamais écrits dans le dépôt).
+    Le refresh token peut changer : le nouveau est déposé dans nouveau_refresh.txt (lu puis effacé par sauve_secret.py)."""
+    cid, csec, rt = (os.environ.get(k, "") for k in ("WITHINGS_CLIENT_ID", "WITHINGS_CLIENT_SECRET", "WITHINGS_REFRESH_TOKEN"))
+    if not (cid and csec and rt):
+        return None
+    api = "https://wbsapi.withings.net"
+    corps = urllib.parse.urlencode({"action": "requesttoken", "grant_type": "refresh_token",
+                                    "client_id": cid, "client_secret": csec, "refresh_token": rt}).encode()
+    rep = json.loads(urllib.request.urlopen(urllib.request.Request(api + "/v2/oauth2", data=corps), timeout=20).read())
+    if rep.get("status") != 0:
+        print("Withings : renouvellement refusé", rep.get("status")); return None
+    jeton = rep["body"]
+    (ICI / "nouveau_refresh.txt").write_text(jeton["refresh_token"], encoding="utf-8")
+    corps = urllib.parse.urlencode({"action": "getmeas", "meastypes": "1,6", "category": 1}).encode()
+    req = urllib.request.Request(api + "/measure", data=corps, headers={"Authorization": "Bearer " + jeton["access_token"]})
+    rep = json.loads(urllib.request.urlopen(req, timeout=20).read())
+    if rep.get("status") != 0:
+        print("Withings : lecture refusée", rep.get("status")); return None
+    dernier = {}
+    for groupe in rep["body"]["measuregrps"]:
+        for m in groupe["measures"]:
+            t, val = m["type"], m["value"] * (10 ** m["unit"])
+            if t not in dernier or groupe["date"] > dernier[t][0]:
+                dernier[t] = (groupe["date"], val)
+    return {"poids_kg": round(dernier[1][1], 1) if 1 in dernier else None,
+            "masse_grasse_pct": round(dernier[6][1], 1) if 6 in dernier else None}
+
+def corps_precedent():
+    """Dernier poids publié (donnees.json présent dans le dépôt). Sert si Withings ne répond pas."""
+    try:
+        return json.loads((ICI / "donnees.json").read_text(encoding="utf-8")).get("corps")
+    except Exception:
+        return None
+
 def affiche(h):
     """« 09:00 » -> « 09 h 00 » ; vide -> « journée » ; « matin », « après-midi » restent tels quels."""
     h = (h or "").strip()
@@ -135,12 +170,19 @@ if __name__ == "__main__":
     prio = [l for l in (ICI / "priorites.json").read_text(encoding="utf-8").splitlines() if l.strip()]
     prio = json.loads("\n".join(prio))
     m = meteo(); pr = prieres(); mt = match()
+    corps = None
+    try:
+        corps = poids_withings()
+    except Exception as e:
+        print("Withings indisponible :", type(e).__name__)
+    if corps is None:
+        corps = corps_precedent()
     ag = emploi_du_jour(NOW)
     suiv = prochaine(NOW, pr["prieres"])
     texte = texte_briefing(NOW, m, prio, ag, suiv)
     donnees = {"date": f"{JOURS[NOW.weekday()]} {NOW.day} {MOIS[NOW.month-1]} {NOW.year}",
                "genere": NOW.strftime("%Y-%m-%d %H:%M"), "meteo": m, "prieres": pr, "priorites": prio,
-               "classement": classement(), "match": mt, "corps": None, "agenda": ag,
+               "classement": classement(), "match": mt, "corps": corps, "agenda": ag,
                "semaine": json.loads((ICI / "emploi_du_temps.json").read_text(encoding="utf-8")).get("semaine", {}),
                "texte": texte, "audio": "briefing.mp3"}
     json.dump(donnees, open("donnees.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
