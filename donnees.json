@@ -1,6 +1,6 @@
 {
  "date": "mercredi 11 novembre 2026",
- "genere": "2026-11-11 16:38",
+ "genere": "2026-11-11 23:12",
  "priorites": [
   "Séance de sport",
   "Trouver des idées de tournage de vidéo",
@@ -48,9 +48,10 @@
   ]
  },
  "prochaine": {
-  "nom": "Maghrib",
-  "adhan": "17:19",
-  "iqama": "17:24"
+  "nom": "Fajr",
+  "adhan": "06:05",
+  "iqama": "06:15",
+  "demain": true
  },
  "classement": {
   "titre": "Classement · Choisy-le-Roi AS Senior 2",
