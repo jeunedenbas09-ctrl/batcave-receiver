@@ -1,17 +1,17 @@
 {
  "date": "jeudi 12 novembre 2026",
- "genere": "2026-11-12 00:21",
+ "genere": "2026-11-12 07:25",
  "meteo": {
   "ville": "Choisy-le-Roi",
   "source": "Open-Meteo",
-  "releve": "2026-11-12T00:15",
-  "temp": 9,
-  "ressenti": 9,
-  "ciel": "brouillard",
-  "vent": 1,
+  "releve": "2026-11-12T07:15",
+  "temp": 10,
+  "ressenti": 8,
+  "ciel": "ciel couvert",
+  "vent": 10,
   "min": 6,
   "max": 12,
-  "pluie": 0,
+  "pluie": 3,
   "ciel_jour": "brouillard",
   "lever": "07:54",
   "coucher": "17:14"
@@ -283,6 +283,6 @@
    }
   ]
  },
- "texte": "Bonjour, Monsieur Amine. Nous sommes le jeudi 12 novembre. À Choisy-le-Roi, brouillard, 9 degrés, ressenti 9. Aujourd'hui : brouillard, entre 6 et 12 degrés, 0 pour cent de risque de pluie. À votre agenda : 08 h 00, Taff (8h-15h) ; 17 h 00, Entraînement foot avec les petits (17h-19h) ; 20 h 00, Foot en club avec Ouchi (20h-22h). Vos priorités du jour. Premièrement : Séance de sport. Deuxièmement : Trouver des idées de tournage de vidéo. Troisièmement : Remplir les cahiers de culture. Ensuite : Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
+ "texte": "Bonjour, Monsieur Amine. Nous sommes le jeudi 12 novembre. À Choisy-le-Roi, ciel couvert, 10 degrés, ressenti 8. Aujourd'hui : brouillard, entre 6 et 12 degrés, 3 pour cent de risque de pluie. À votre agenda : 08 h 00, Taff (8h-15h) ; 17 h 00, Entraînement foot avec les petits (17h-19h) ; 20 h 00, Foot en club avec Ouchi (20h-22h). Vos priorités du jour. Premièrement : Séance de sport. Deuxièmement : Trouver des idées de tournage de vidéo. Troisièmement : Remplir les cahiers de culture. Ensuite : Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
  "audio": "briefing.mp3"
 }
