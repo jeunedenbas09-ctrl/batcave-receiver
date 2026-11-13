@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Batcave">
+<meta name="theme-color" content="#020611">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icone.png">
+<title>Batcave</title>
+<style>
+  :root {
+    --nuit:#020611; --marine:#07122b; --bleu:#2f7bff; --azur:#3fa2ff; --glace:#a8d3ff; --blanc:#eef5ff;
+    --doux:#7b93bf; --alerte:#ff6b6b; --trait:rgba(72,140,255,.28); --trait2:rgba(72,140,255,.12);
+    --mono:"SF Mono","Menlo","Consolas",monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html { background: var(--nuit); }
+  body { min-height: 100vh; color: var(--blanc); font-family: -apple-system, "SF Pro Text", "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(120% 60% at 50% -10%, rgba(47,123,255,.22), transparent 60%), var(--nuit);
+    padding: calc(env(safe-area-inset-top) + 18px) 16px calc(env(safe-area-inset-bottom) + 28px); overflow-x: hidden; }
+  .entete { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .marque { display: flex; align-items: center; gap: 10px; }
+  .marque svg { width: 38px; height: 38px; filter: drop-shadow(0 0 6px rgba(47,123,255,.8)); }
+  .marque b { display: block; font-size: 15px; letter-spacing: .3em; font-weight: 700; }
+  .marque span { display: block; margin-top: 2px; font: 500 10px var(--mono); letter-spacing: .14em; color: var(--azur); }
+  .etat { font: 500 10px var(--mono); color: var(--doux); text-align: right; letter-spacing: .06em; }
+  .date { margin-top: 18px; font-size: 22px; font-weight: 700; text-transform: capitalize; }
+  .carte { position: relative; margin-top: 12px; padding: 14px 16px; border-radius: 16px; border: 1px solid var(--trait);
+    background: linear-gradient(165deg, rgba(10,25,60,.72), rgba(3,8,22,.88)); box-shadow: inset 0 1px 0 rgba(168,211,255,.10); }
+  h2 { font: 600 11px var(--mono); letter-spacing: .22em; text-transform: uppercase; color: var(--glace); margin-bottom: 10px; }
+  .k { font: 500 10px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--doux); }
+  .hero b { display: block; font-size: 30px; font-weight: 700; margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .hero .dans { margin-top: 4px; font-size: 15px; color: var(--glace); }
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .gros { font-size: 30px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+  .petit { font-size: 13px; color: var(--glace); margin-top: 6px; }
+  .liste { display: grid; gap: 8px; }
+  .ligne { display: grid; grid-template-columns: 58px 1fr; gap: 10px; padding: 8px 10px; border-left: 2px solid var(--azur);
+    background: rgba(47,123,255,.08); border-radius: 0 10px 10px 0; font-size: 15px; }
+  .ligne b { font: 600 13px var(--mono); color: var(--glace); }
+  .ligne.cours { background: rgba(63,162,255,.24); border-left-color: #fff; }
+  .ligne.passe { opacity: .45; }
+  .prio { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--trait2); font-size: 15px; }
+  .prio:last-child { border-bottom: 0; }
+  .prio i { display: grid; place-items: center; width: 26px; height: 26px; font: 700 12px var(--mono); font-style: normal;
+    background: rgba(63,162,255,.24); color: var(--blanc); border-radius: 6px; }
+  .pri { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--trait2); font-size: 15px; }
+  .pri:last-child { border-bottom: 0; }
+  .pri .h b { font: 600 15px var(--mono); }
+  .pri.suiv { color: #fff; text-shadow: 0 0 10px rgba(63,162,255,.9); }
+  .pri.passe { opacity: .4; }
+  .pri small { font: 500 10px var(--mono); color: var(--doux); letter-spacing: .1em; text-transform: uppercase; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+  th { font: 500 10px var(--mono); color: var(--doux); text-align: right; padding: 4px 3px; border-bottom: 1px solid var(--trait); }
+  td { text-align: right; padding: 6px 3px; border-bottom: 1px solid var(--trait2); }
+  td.eq, th.eq { text-align: left; }
+  tr.moi td { color: #fff; font-weight: 700; background: rgba(47,123,255,.24); }
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .match b { display: block; font-size: 17px; }
+  .match .vs { font: 500 11px var(--mono); color: var(--azur); letter-spacing: .2em; margin: 4px 0; display: block; }
+  .transcript { font-size: 15px; line-height: 1.5; color: var(--glace); }
+  .bouton { width: 100%; margin-top: 14px; padding: 15px; border: 0; border-radius: 14px; background: var(--bleu); color: #fff;
+    font: 700 16px -apple-system, "SF Pro Text", Arial, sans-serif; letter-spacing: .04em; cursor: pointer; box-shadow: 0 6px 18px rgba(47,123,255,.35); }
+  .bouton:active { transform: scale(.99); }
+  .vide { font-size: 14px; color: var(--doux); line-height: 1.5; }
+  .pied { margin-top: 18px; text-align: center; font: 500 10px var(--mono); color: var(--doux); letter-spacing: .08em; }
+  .pied button { margin-left: 8px; background: none; border: 1px solid var(--trait); color: var(--glace); border-radius: 8px; padding: 6px 10px; font: 500 11px var(--mono); }
+</style>
+</head>
+<body>
+
+<header class="entete">
+  <div class="marque">
+    <svg viewBox="0 0 240 240" aria-hidden="true">
+      <polygon points="120,14 212,67 212,173 120,226 28,173 28,67" fill="none" stroke="#7cc0ff" stroke-width="8" stroke-linejoin="round"/>
+      <polygon points="120,42 188,81 188,159 120,198 52,159 52,81" fill="#2f7bff"/>
+      <text x="120" y="149" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="84" fill="#fff">94</text>
+    </svg>
+    <div><b>BATCAVE</b><span>ALFRED · BRIEFING</span></div>
+  </div>
+  <div class="etat" id="etat">chargement…</div>
+</header>
+
+<div class="date" id="date"></div>
+
+<section class="carte hero" id="prochaine"></section>
+
+<section class="carte" id="meteoC"><h2>Météo</h2><div id="meteo"></div></section>
+
+<section class="carte"><h2>Agenda du jour</h2><div class="liste" id="agenda"></div></section>
+
+<section class="carte"><h2>Priorités</h2><div id="prios"></div></section>
+
+<section class="carte"><h2>Corps</h2><div class="duo" id="corps"></div></section>
+
+<section class="carte"><h2>Prochain match</h2><div id="match"></div></section>
+
+<section class="carte"><h2>Prières du jour</h2><div id="prieres"></div></section>
+
+<section class="carte"><h2>Classement</h2><div class="scroll" id="classement"></div></section>
+
+<section class="carte"><h2>Briefing d'Alfred</h2>
+  <div class="transcript" id="texte"></div>
+  <button class="bouton" id="ecouter" type="button">Écouter le briefing</button>
+</section>
+
+<footer class="pied"><span id="pied">Batcave</span><button id="rafraichir" type="button">Actualiser</button></footer>
+
+<audio id="voix" preload="none"></audio>
+
+<script>
+const BASE = "https://raw.githubusercontent.com/jeunedenbas09-ctrl/batcave-receiver/main/";
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const deux = (n) => String(n).padStart(2, "0");
+const enMin = (s) => { const m = /^(\d{1,2})\s*(?::|h)\s*(\d{2})$/.exec(String(s || "").trim()); return m ? +m[1] * 60 + +m[2] : null; };
+const aH = (s) => String(s || "").replace(":", " h ");
+const JOURS_FR = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+const JOURS_CLE = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
+const MOIS_FR = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+const duree = (sec) => { const m = Math.max(1, Math.ceil(sec / 60)), h = Math.floor(m / 60); return h ? h + " h " + deux(m % 60) : m + " min"; };
+
+let D = null;
+try { D = JSON.parse(localStorage.getItem("batcave-tel") || "null"); } catch (e) {}
+
+function statut(t) { $("etat").textContent = t; $("pied").textContent = "Batcave · " + t; }
+
+async function charger() {
+  statut("chargement…");
+  try {
+    const r = await fetch(BASE + "donnees.json?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    D = await r.json();
+    try { localStorage.setItem("batcave-tel", JSON.stringify(D)); } catch (e) {}
+    statut("données du " + (D.genere || "?"));
+  } catch (e) {
+    statut(D ? "hors ligne · données du " + (D.genere || "?") : "données indisponibles");
+  }
+  rendre();
+}
+
+function prochainePriere(mn) {
+  const L = (D.prieres && D.prieres.prieres || []).filter((p) => p.nom !== "Shuruq").map((p) => ({ ...p, t: enMin(p.adhan) }));
+  if (!L.length) return null;
+  let suiv = L.find((p) => p.t > mn), demain = false;
+  if (!suiv) { suiv = L[0]; demain = true; }
+  const tS = demain ? suiv.t + 1440 : suiv.t;
+  return { suiv, demain, reste: (tS - mn) * 60 };
+}
+
+function rendre() {
+  if (!D) { $("prochaine").innerHTML = '<div class="vide">Aucune donnée pour l\'instant. Vérifie la connexion puis appuie sur Actualiser.</div>'; return; }
+  const n = new Date(), mn = n.getHours() * 60 + n.getMinutes();
+  $("date").textContent = JOURS_FR[n.getDay()] + " " + n.getDate() + " " + MOIS_FR[n.getMonth()] + " " + n.getFullYear();
+
+  // prochaine prière + compte à rebours
+  const p = prochainePriere(mn);
+  $("prochaine").innerHTML = p ? `<div class="k">Prochaine prière${p.demain ? " · demain" : ""}</div><b>${esc(p.suiv.nom)} · ${esc(p.suiv.adhan)}</b><div class="dans">dans ${duree(p.reste)}</div>`
+                               : '<div class="vide">Horaires indisponibles.</div>';
+
+  // météo
+  const m = D.meteo;
+  $("meteo").innerHTML = m ? `<div class="duo"><div><div class="gros">${esc(m.temp)}°</div><div class="petit">${esc(m.ciel)}</div></div>
+      <div><div class="gros" style="font-size:22px">${esc(m.min)}° / ${esc(m.max)}°</div><div class="petit">ressenti ${esc(m.ressenti)}° · vent ${esc(m.vent)} km/h</div></div></div>
+      <div class="petit">${esc(m.ciel_jour)} · pluie ${esc(m.pluie)} % · ${esc(m.ville)}</div>`
+                           : '<div class="vide">Météo indisponible.</div>';
+
+  // agenda du jour, d'après la semaine type publiée
+  const cle = JOURS_CLE[(n.getDay() + 6) % 7];
+  const ordre = (h) => { if (!h || h === "journée") return 0; if (h === "matin") return 1; if (h.startsWith("après")) return 780; const x = enMin(h); return x == null ? 99999 : x + 2; };
+  const items = ((D.semaine && D.semaine[cle]) || []).slice().sort((a, b) => ordre(a.heure) - ordre(b.heure));
+  $("agenda").innerHTML = items.length ? items.map((e) => {
+    const d = enMin(e.heure), f = enMin(e.fin);
+    let cls = "";
+    if (d != null) {
+      if (f != null && mn >= d && mn < f) cls = "cours";
+      else if (f != null && mn >= f) cls = "passe";
+      else if (mn >= d) cls = "passe";
+    }
+    return `<div class="ligne ${cls}"><b>${esc(e.heure ? aH(e.heure) : "journée")}</b><span>${esc(e.titre)}${e.fin ? " <small>→ " + esc(aH(e.fin)) + "</small>" : ""}</span></div>`;
+  }).join("") : '<div class="vide">Rien de prévu aujourd\'hui.</div>';
+
+  // priorités
+  const P = D.priorites || [];
+  $("prios").innerHTML = P.length ? P.map((x, i) => `<div class="prio"><i>${deux(i + 1)}</i><span>${esc(x)}</span></div>`).join("")
+                                  : '<div class="vide">Aucune priorité aujourd\'hui.</div>';
+
+  // corps
+  const c = D.corps;
+  $("corps").innerHTML = c ? `<div><div class="gros">${esc(c.poids_kg)} kg</div><div class="petit">poids</div></div>
+      <div><div class="gros">${esc(c.masse_grasse_pct)} %</div><div class="petit">masse grasse</div></div>`
+                           : '<div class="vide">Pas de mesure publiée.</div>';
+
+  // match
+  const M = D.match;
+  $("match").innerHTML = M ? `<div class="match"><span class="k">${esc(M.journee || "")}</span><b>${esc(M.equipe)}</b><span class="vs">CONTRE</span><b>${esc(M.adversaire)}</b>
+      <div class="petit">${M.domicile ? "à domicile" : "à l'extérieur"} · ${esc(M.affiche)}</div></div>`
+                             : '<div class="vide">Aucun match renseigné.</div>';
+
+  // prières
+  const PR = (D.prieres && D.prieres.prieres) || [];
+  $("prieres").innerHTML = PR.length ? PR.map((x) => {
+    const t = enMin(x.adhan), suiv = p && !p.demain && p.suiv.nom === x.nom, fait = t != null && t <= mn;
+    return `<div class="pri ${suiv ? "suiv" : fait ? "passe" : ""}"><span class="h">${esc(x.nom === "Shuruq" ? "Lever du soleil" : x.nom)}</span><b>${esc(x.adhan)}</b><small>${x.iqama ? "iqama " + esc(x.iqama) : ""}</small></div>`;
+  }).join("") : '<div class="vide">Horaires indisponibles.</div>';
+
+  // classement
+  const C = D.classement;
+  $("classement").innerHTML = C && C.lignes ? `<table><thead><tr><th>#</th><th class="eq">Équipe</th><th>Pts</th><th>J</th><th>Diff</th></tr></thead><tbody>` +
+    C.lignes.map((l) => `<tr class="${l.equipe === C.equipe_suivie ? "moi" : ""}"><td>${l.rang}</td><td class="eq">${esc(l.equipe)}</td><td><b>${l.pts}</b></td><td>${l.j}</td><td>${l.diff > 0 ? "+" + l.diff : l.diff}</td></tr>`).join("") + `</tbody></table>`
+    : '<div class="vide">Classement indisponible.</div>';
+
+  // briefing
+  $("texte").textContent = D.texte || "Pas de briefing publié.";
+}
+
+// lecture du briefing vocal (briefing.mp3 publié sur GitHub)
+$("ecouter").addEventListener("click", () => {
+  const a = $("voix"), b = $("ecouter");
+  if (!D || !D.audio) { b.textContent = "Pas de voix publiée"; return; }
+  if (!a.src || a.dataset.src !== D.audio) { a.src = BASE + D.audio + "?t=" + Date.now(); a.dataset.src = D.audio; }
+  if (a.paused) { a.play().then(() => b.textContent = "Pause").catch(() => b.textContent = "Lecture impossible"); }
+  else { a.pause(); b.textContent = "Reprendre le briefing"; }
+});
+$("voix").addEventListener("ended", () => { $("ecouter").textContent = "Écouter le briefing"; });
+$("rafraichir").addEventListener("click", charger);
+
+rendre();
+charger();
+setInterval(rendre, 30000);
+</script>
+</body>
+</html>
