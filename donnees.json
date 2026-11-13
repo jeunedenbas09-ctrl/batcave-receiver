@@ -1,31 +1,31 @@
 {
- "date": "jeudi 12 novembre 2026",
- "genere": "2026-11-12 07:25",
+ "date": "vendredi 13 novembre 2026",
+ "genere": "2026-11-13 07:23",
  "meteo": {
   "ville": "Choisy-le-Roi",
   "source": "Open-Meteo",
-  "releve": "2026-11-12T07:15",
-  "temp": 10,
-  "ressenti": 8,
-  "ciel": "ciel couvert",
-  "vent": 10,
-  "min": 6,
-  "max": 12,
-  "pluie": 3,
-  "ciel_jour": "brouillard",
-  "lever": "07:54",
-  "coucher": "17:14"
+  "releve": "2026-11-13T07:15",
+  "temp": 4,
+  "ressenti": 2,
+  "ciel": "ciel dégagé",
+  "vent": 6,
+  "min": 4,
+  "max": 11,
+  "pluie": 0,
+  "ciel_jour": "ciel partiellement nuageux",
+  "lever": "07:55",
+  "coucher": "17:12"
  },
  "prieres": {
   "prieres": [
    {
     "nom": "Fajr",
-    "adhan": "06:05",
-    "iqama": "06:15"
+    "adhan": "06:07",
+    "iqama": "06:17"
    },
    {
     "nom": "Shuruq",
-    "adhan": "07:55",
+    "adhan": "07:57",
     "iqama": null
    },
    {
@@ -35,13 +35,13 @@
    },
    {
     "nom": "Asr",
-    "adhan": "14:51",
-    "iqama": "15:01"
+    "adhan": "14:50",
+    "iqama": "15:00"
    },
    {
     "nom": "Maghrib",
-    "adhan": "17:17",
-    "iqama": "17:22"
+    "adhan": "17:16",
+    "iqama": "17:21"
    },
    {
     "nom": "Isha",
@@ -200,16 +200,8 @@
  },
  "agenda": [
   {
-   "heure": "08 h 00",
-   "titre": "Taff (8h-15h)"
-  },
-  {
-   "heure": "17 h 00",
-   "titre": "Entraînement foot avec les petits (17h-19h)"
-  },
-  {
-   "heure": "20 h 00",
-   "titre": "Foot en club avec Ouchi (20h-22h)"
+   "heure": "09 h 00",
+   "titre": "École (9h-17h)"
   }
  ],
  "semaine": {
@@ -283,6 +275,6 @@
    }
   ]
  },
- "texte": "Bonjour, Monsieur Amine. Nous sommes le jeudi 12 novembre. À Choisy-le-Roi, ciel couvert, 10 degrés, ressenti 8. Aujourd'hui : brouillard, entre 6 et 12 degrés, 3 pour cent de risque de pluie. À votre agenda : 08 h 00, Taff (8h-15h) ; 17 h 00, Entraînement foot avec les petits (17h-19h) ; 20 h 00, Foot en club avec Ouchi (20h-22h). Vos priorités du jour. Premièrement : Séance de sport. Deuxièmement : Trouver des idées de tournage de vidéo. Troisièmement : Remplir les cahiers de culture. Ensuite : Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
+ "texte": "Bonjour, Monsieur Amine. Nous sommes le vendredi 13 novembre. À Choisy-le-Roi, ciel dégagé, 4 degrés, ressenti 2. Aujourd'hui : ciel partiellement nuageux, entre 4 et 11 degrés, 0 pour cent de risque de pluie. À votre agenda : 09 h 00, École (9h-17h). Vos priorités du jour. Premièrement : Séance de sport. Deuxièmement : Trouver des idées de tournage de vidéo. Troisièmement : Remplir les cahiers de culture. Ensuite : Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
  "audio": "briefing.mp3"
 }
