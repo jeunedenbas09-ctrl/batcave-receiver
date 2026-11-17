@@ -1,31 +1,31 @@
 {
- "date": "lundi 16 novembre 2026",
- "genere": "2026-11-16 08:00",
+ "date": "mardi 17 novembre 2026",
+ "genere": "2026-11-17 07:25",
  "meteo": {
   "ville": "Choisy-le-Roi",
   "source": "Open-Meteo",
-  "releve": "2026-11-16T08:00",
-  "temp": 11,
-  "ressenti": 9,
-  "ciel": "ciel couvert",
-  "vent": 11,
-  "min": 11,
-  "max": 13,
+  "releve": "2026-11-17T07:15",
+  "temp": 16,
+  "ressenti": 13,
+  "ciel": "averses faibles",
+  "vent": 27,
+  "min": 12,
+  "max": 18,
   "pluie": 100,
-  "ciel_jour": "pluie faible",
-  "lever": "08:00",
-  "coucher": "17:09"
+  "ciel_jour": "averses",
+  "lever": "08:02",
+  "coucher": "17:08"
  },
  "prieres": {
   "prieres": [
    {
     "nom": "Fajr",
-    "adhan": "06:11",
-    "iqama": "06:21"
+    "adhan": "06:12",
+    "iqama": "06:22"
    },
    {
     "nom": "Shuruq",
-    "adhan": "08:01",
+    "adhan": "08:03",
     "iqama": null
    },
    {
@@ -35,13 +35,13 @@
    },
    {
     "nom": "Asr",
-    "adhan": "14:47",
-    "iqama": "14:57"
+    "adhan": "14:46",
+    "iqama": "14:56"
    },
    {
     "nom": "Maghrib",
-    "adhan": "17:12",
-    "iqama": "17:17"
+    "adhan": "17:11",
+    "iqama": "17:16"
    },
    {
     "nom": "Isha",
@@ -200,8 +200,16 @@
  },
  "agenda": [
   {
-   "heure": "journée",
-   "titre": "Taff"
+   "heure": "08 h 00",
+   "titre": "Taff (8h-15h)"
+  },
+  {
+   "heure": "17 h 00",
+   "titre": "Entraînement foot avec les petits (17h-19h)"
+  },
+  {
+   "heure": "20 h 00",
+   "titre": "Foot en club avec Ouchi (20h-22h)"
   }
  ],
  "semaine": {
@@ -275,6 +283,6 @@
    }
   ]
  },
- "texte": "Bonjour, Monsieur Amine. Nous sommes le lundi 16 novembre. À Choisy-le-Roi, ciel couvert, 11 degrés, ressenti 9. Aujourd'hui : pluie faible, entre 11 et 13 degrés, 100 pour cent de risque de pluie. À votre agenda : journée, Taff. Vos priorités du jour. Premièrement : Séance de sport. Deuxièmement : Trouver des idées de tournage de vidéo. Troisièmement : Remplir les cahiers de culture. Ensuite : Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
+ "texte": "Bonjour, Monsieur Amine. Nous sommes le mardi 17 novembre. À Choisy-le-Roi, averses faibles, 16 degrés, ressenti 13. Aujourd'hui : averses, entre 12 et 18 degrés, 100 pour cent de risque de pluie. À votre agenda : 08 h 00, Taff (8h-15h) ; 17 h 00, Entraînement foot avec les petits (17h-19h) ; 20 h 00, Foot en club avec Ouchi (20h-22h). Vos priorités du jour. Premièrement : Séance de sport. Deuxièmement : Trouver des idées de tournage de vidéo. Troisièmement : Remplir les cahiers de culture. Ensuite : Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
  "audio": "briefing.mp3"
 }
