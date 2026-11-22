@@ -1,31 +1,31 @@
 {
- "date": "samedi 21 novembre 2026",
- "genere": "2026-11-21 07:20",
+ "date": "dimanche 22 novembre 2026",
+ "genere": "2026-11-22 07:20",
  "meteo": {
   "ville": "Choisy-le-Roi",
   "source": "Open-Meteo",
-  "releve": "2026-11-21T07:15",
-  "temp": 9,
-  "ressenti": 8,
-  "ciel": "ciel couvert",
-  "vent": 4,
-  "min": 9,
-  "max": 12,
-  "pluie": 5,
-  "ciel_jour": "pluie faible",
-  "lever": "08:07",
+  "releve": "2026-11-22T07:15",
+  "temp": 8,
+  "ressenti": 5,
+  "ciel": "pluie faible",
+  "vent": 11,
+  "min": 8,
+  "max": 11,
+  "pluie": 95,
+  "ciel_jour": "pluie",
+  "lever": "08:09",
   "coucher": "17:03"
  },
  "prieres": {
   "prieres": [
    {
     "nom": "Fajr",
-    "adhan": "06:17",
-    "iqama": "06:27"
+    "adhan": "06:18",
+    "iqama": "06:28"
    },
    {
     "nom": "Shuruq",
-    "adhan": "08:09",
+    "adhan": "08:10",
     "iqama": null
    },
    {
@@ -35,13 +35,13 @@
    },
    {
     "nom": "Asr",
-    "adhan": "14:43",
-    "iqama": "14:53"
+    "adhan": "14:42",
+    "iqama": "14:52"
    },
    {
     "nom": "Maghrib",
-    "adhan": "17:07",
-    "iqama": "17:12"
+    "adhan": "17:06",
+    "iqama": "17:11"
    },
    {
     "nom": "Isha",
@@ -201,7 +201,11 @@
  "agenda": [
   {
    "heure": "matin",
-   "titre": "Match avec les petits"
+   "titre": "Taff"
+  },
+  {
+   "heure": "après-midi",
+   "titre": "Match avec Ouchi"
   }
  ],
  "semaine": {
@@ -275,6 +279,6 @@
    }
   ]
  },
- "texte": "Bonjour, Monsieur Amine. Nous sommes le samedi 21 novembre. À Choisy-le-Roi, ciel couvert, 9 degrés, ressenti 8. Aujourd'hui : pluie faible, entre 9 et 12 degrés, 5 pour cent de risque de pluie. À votre agenda : matin, Match avec les petits. Vos priorités du jour. Premièrement : Séance de sport. Deuxièmement : Trouver des idées de tournage de vidéo. Troisièmement : Remplir les cahiers de culture. Ensuite : Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
+ "texte": "Bonjour, Monsieur Amine. Nous sommes le dimanche 22 novembre. À Choisy-le-Roi, pluie faible, 8 degrés, ressenti 5. Aujourd'hui : pluie, entre 8 et 11 degrés, 95 pour cent de risque de pluie. À votre agenda : matin, Taff ; après-midi, Match avec Ouchi. Vos priorités du jour. Premièrement : Séance de sport. Deuxièmement : Trouver des idées de tournage de vidéo. Troisièmement : Remplir les cahiers de culture. Ensuite : Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
  "audio": "briefing.mp3"
 }
