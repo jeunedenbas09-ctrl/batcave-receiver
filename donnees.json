@@ -1,37 +1,37 @@
 {
- "date": "mardi 24 novembre 2026",
- "genere": "2026-11-24 07:21",
+ "date": "mercredi 25 novembre 2026",
+ "genere": "2026-11-25 07:22",
  "meteo": {
   "ville": "Choisy-le-Roi",
   "source": "Open-Meteo",
-  "releve": "2026-11-24T07:15",
-  "temp": 4,
-  "ressenti": 1,
-  "ciel": "ciel couvert",
+  "releve": "2026-11-25T07:15",
+  "temp": 5,
+  "ressenti": 2,
+  "ciel": "pluie faible",
   "vent": 9,
-  "min": 3,
-  "max": 7,
-  "pluie": 0,
-  "ciel_jour": "ciel couvert",
-  "lever": "08:12",
-  "coucher": "17:01"
+  "min": 4,
+  "max": 8,
+  "pluie": 95,
+  "ciel_jour": "averses faibles",
+  "lever": "08:13",
+  "coucher": "17:00"
  },
  "prieres": {
   "prieres": [
    {
     "nom": "Fajr",
-    "adhan": "06:21",
-    "iqama": "06:31"
+    "adhan": "06:22",
+    "iqama": "06:32"
    },
    {
     "nom": "Shuruq",
-    "adhan": "08:13",
+    "adhan": "08:15",
     "iqama": null
    },
    {
     "nom": "Dhuhr",
-    "adhan": "12:38",
-    "iqama": "12:48"
+    "adhan": "12:39",
+    "iqama": "12:49"
    },
    {
     "nom": "Asr",
@@ -200,16 +200,8 @@
  },
  "agenda": [
   {
-   "heure": "08 h 00",
-   "titre": "Taff (8h-15h)"
-  },
-  {
-   "heure": "17 h 00",
-   "titre": "Entraînement foot avec les petits (17h-19h)"
-  },
-  {
-   "heure": "20 h 00",
-   "titre": "Foot en club avec Ouchi (20h-22h)"
+   "heure": "journée",
+   "titre": "Taff"
   }
  ],
  "semaine": {
@@ -283,6 +275,6 @@
    }
   ]
  },
- "texte": "Bonjour, Monsieur Amine. Nous sommes le mardi 24 novembre. À Choisy-le-Roi, ciel couvert, 4 degrés, ressenti 1. Aujourd'hui : ciel couvert, entre 3 et 7 degrés, 0 pour cent de risque de pluie. À votre agenda : 08 h 00, Taff (8h-15h) ; 17 h 00, Entraînement foot avec les petits (17h-19h) ; 20 h 00, Foot en club avec Ouchi (20h-22h). Vos priorités du jour. Premièrement : Séance de sport. Deuxièmement : Trouver des idées de tournage de vidéo. Troisièmement : Remplir les cahiers de culture. Ensuite : Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
+ "texte": "Bonjour, Monsieur Amine. Nous sommes le mercredi 25 novembre. À Choisy-le-Roi, pluie faible, 5 degrés, ressenti 2. Aujourd'hui : averses faibles, entre 4 et 8 degrés, 95 pour cent de risque de pluie. À votre agenda : journée, Taff. Vos priorités du jour. Premièrement : Séance de sport. Deuxièmement : Trouver des idées de tournage de vidéo. Troisièmement : Remplir les cahiers de culture. Ensuite : Lire 15 pages de Robin des Bois. La Batcave est prête. Force et honneur, Monsieur.",
  "audio": "briefing.mp3"
 }
